@@ -935,7 +935,4 @@
                 teamwork: document.getElementById('teamwork').value,
                 builderPortfolio: document.getElementById('builderPortfolio').value,
                 testerMethod: document.getElementById('testerMethod').value,
-                scripterSkills: document.getElementById('scripterSkills').value,
-                goals: document.getElementById('goals').value,
-                status: 'pending',
-                date: new Date
+               
