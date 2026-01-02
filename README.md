@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Majestic DM | Система заявок</title>
     <style>
-        /* Основные стили */
         * {
             margin: 0;
             padding: 0;
@@ -13,13 +12,13 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Arial', sans-serif;
-            background: #0a0a1a;
-            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a14;
+            color: #e0e0ff;
             min-height: 100vh;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255, 20, 150, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(255, 20, 150, 0.1) 0%, transparent 20%);
+                radial-gradient(circle at 10% 10%, rgba(100, 0, 255, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 90% 90%, rgba(255, 0, 150, 0.15) 0%, transparent 20%);
         }
 
         .container {
@@ -28,31 +27,39 @@
             padding: 0 20px;
         }
 
-        /* Неоновый текст */
+        /* Темный неон */
         .neon-text {
-            color: #fff;
+            color: #8a2be2;
             text-shadow:
-                0 0 5px #ff00ff,
-                0 0 10px #ff00ff,
-                0 0 20px #ff00ff,
-                0 0 40px #ff1493,
-                0 0 80px #ff1493;
-            font-weight: bold;
+                0 0 7px #8a2be2,
+                0 0 10px #8a2be2,
+                0 0 21px #8a2be2,
+                0 0 42px #4b0082,
+                0 0 82px #4b0082;
+            font-weight: 800;
+            letter-spacing: 1px;
         }
 
-        .neon-pink {
-            color: #ff00ff;
+        .neon-purple {
+            color: #9370db;
             text-shadow:
-                0 0 10px #ff00ff,
-                0 0 20px #ff1493;
+                0 0 5px #9370db,
+                0 0 10px #8a2be2;
         }
 
-        /* Шапка */
+        .neon-cyan {
+            color: #00ced1;
+            text-shadow:
+                0 0 5px #00ced1,
+                0 0 10px #008b8b;
+        }
+
+        /* Шапка - стильный минимализм */
         header {
-            background: rgba(10, 10, 26, 0.95);
-            border-bottom: 2px solid #ff00ff;
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 20, 0.95);
+            border-bottom: 1px solid #4b0082;
+            box-shadow: 0 4px 20px rgba(75, 0, 130, 0.3);
+            backdrop-filter: blur(15px);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -62,7 +69,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            padding: 20px 0;
         }
 
         .logo {
@@ -72,54 +79,53 @@
         }
 
         .logo h1 {
-            font-size: 2.2rem;
-            letter-spacing: 2px;
+            font-size: 2.5rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 900;
         }
 
         .logo-icon {
-            font-size: 2.5rem;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { text-shadow: 0 0 10px #ff00ff; }
-            50% { text-shadow: 0 0 20px #ff00ff, 0 0 30px #ff1493; }
+            font-size: 2.8rem;
+            color: #8a2be2;
+            filter: drop-shadow(0 0 8px #8a2be2);
         }
 
         /* Навигация */
         nav {
             display: flex;
-            gap: 10px;
+            gap: 15px;
         }
 
         .nav-btn {
-            background: transparent;
-            color: #ffb6c1;
-            border: 2px solid #ff00ff;
-            padding: 10px 25px;
-            border-radius: 25px;
+            background: rgba(30, 30, 60, 0.7);
+            color: #b19cd9;
+            border: 1px solid #6a0dad;
+            padding: 12px 28px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 1rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .nav-btn:hover {
-            background: rgba(255, 0, 255, 0.2);
-            color: #fff;
-            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+            background: rgba(75, 0, 130, 0.4);
+            border-color: #9370db;
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
             transform: translateY(-2px);
         }
 
         .nav-btn.active {
-            background: linear-gradient(45deg, #ff00ff, #ff1493);
+            background: linear-gradient(135deg, #4b0082 0%, #8a2be2 100%);
             color: white;
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+            border-color: #00ced1;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.6);
         }
 
-        /* Главный контент */
+        /* Основной контент */
         main {
             padding: 40px 0;
         }
@@ -138,146 +144,185 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Карточки форм */
+        /* Карточки */
         .form-card {
-            background: rgba(20, 10, 30, 0.8);
-            border: 2px solid #ff00ff;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 0 40px rgba(255, 0, 255, 0.2);
+            background: rgba(20, 15, 35, 0.85);
+            border: 1px solid #4b0082;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
             margin-bottom: 30px;
+            backdrop-filter: blur(10px);
         }
 
         .form-title {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
+            font-size: 2rem;
+            margin-bottom: 30px;
             text-align: center;
+            color: #9370db;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         /* Форма */
         .form-group {
             margin-bottom: 25px;
-            position: relative;
         }
 
         .form-label {
             display: block;
-            margin-bottom: 8px;
-            color: #ffb6c1;
-            font-weight: 500;
+            margin-bottom: 10px;
+            color: #b19cd9;
+            font-weight: 600;
             font-size: 1.1rem;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .form-icon {
-            color: #ff00ff;
-            font-size: 1.2rem;
+            color: #8a2be2;
+            font-size: 1.3rem;
+            min-width: 30px;
         }
 
         .form-input, .form-select, .form-textarea {
             width: 100%;
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 0, 255, 0.5);
-            border-radius: 10px;
-            color: white;
+            padding: 14px 18px;
+            background: rgba(40, 35, 60, 0.7);
+            border: 1px solid #6a0dad;
+            border-radius: 8px;
+            color: #e0e0ff;
             font-size: 1rem;
             transition: all 0.3s ease;
+            font-family: inherit;
         }
 
         .form-input:focus, .form-select:focus, .form-textarea:focus {
             outline: none;
-            border-color: #ff00ff;
-            box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
-            background: rgba(255, 255, 255, 0.1);
+            border-color: #00ced1;
+            box-shadow: 0 0 0 2px rgba(0, 206, 209, 0.2);
+            background: rgba(50, 45, 70, 0.9);
         }
 
         .form-textarea {
-            min-height: 100px;
+            min-height: 120px;
             resize: vertical;
+            line-height: 1.5;
         }
 
         /* Кнопки */
         .btn {
-            background: linear-gradient(45deg, #ff00ff, #ff1493);
+            background: linear-gradient(135deg, #4b0082 0%, #8a2be2 100%);
             color: white;
             border: none;
-            padding: 15px 35px;
-            border-radius: 25px;
+            padding: 16px 40px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 1.1rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 12px;
+            margin-top: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 0, 255, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid #ff00ff;
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.5);
+            background: linear-gradient(135deg, #5a00a3 0%, #9b30ff 100%);
         }
 
         /* Кнопка просмотра вопросов */
         .toggle-questions-btn {
-            background: transparent;
-            color: #ff00ff;
-            border: 2px dashed #ff00ff;
-            padding: 10px 20px;
-            border-radius: 15px;
+            background: rgba(40, 35, 60, 0.7);
+            color: #9370db;
+            border: 1px dashed #6a0dad;
+            padding: 14px 24px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 1rem;
-            margin: 10px 0;
+            margin: 20px 0;
             width: 100%;
             transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .toggle-questions-btn:hover {
-            background: rgba(255, 0, 255, 0.1);
+            background: rgba(75, 0, 130, 0.2);
             border-style: solid;
+            border-color: #9370db;
         }
 
         /* Скрытые вопросы */
         .hidden-questions {
             display: none;
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(255, 0, 255, 0.05);
-            border-radius: 15px;
-            border-left: 4px solid #ff00ff;
-        }
-
-        .hidden-questions.show {
-            display: block;
+            margin-top: 25px;
+            padding: 25px;
+            background: rgba(30, 25, 45, 0.7);
+            border-radius: 10px;
+            border-left: 4px solid #8a2be2;
             animation: slideDown 0.5s ease;
         }
 
         @keyframes slideDown {
             from { opacity: 0; max-height: 0; }
-            to { opacity: 1; max-height: 1000px; }
+            to { opacity: 1; max-height: 2000px; }
+        }
+
+        .hidden-questions.show {
+            display: block;
+        }
+
+        /* Возрастной барьер */
+        .age-warning {
+            background: rgba(75, 0, 130, 0.2);
+            border: 1px solid #8a2be2;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            color: #b19cd9;
+            font-weight: 600;
+        }
+
+        .age-warning .neon-cyan {
+            font-size: 1.2rem;
         }
 
         /* Админ-панель */
+        .admin-card {
+            background: rgba(20, 15, 35, 0.85);
+            border: 1px solid #4b0082;
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
         .application-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 0, 255, 0.3);
-            border-radius: 15px;
+            background: rgba(40, 35, 60, 0.7);
+            border: 1px solid #6a0dad;
+            border-radius: 10px;
             padding: 20px;
             margin-bottom: 20px;
             transition: all 0.3s ease;
+            border-left: 4px solid #8a2be2;
         }
 
         .application-card:hover {
-            border-color: #ff00ff;
+            border-color: #9370db;
             transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
         }
 
         .application-header {
@@ -285,49 +330,64 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 0, 255, 0.2);
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(107, 13, 173, 0.3);
         }
 
         .application-status {
-            padding: 5px 15px;
-            border-radius: 15px;
+            padding: 6px 18px;
+            border-radius: 20px;
             font-size: 0.9rem;
             font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .status-pending {
-            background: rgba(255, 165, 0, 0.2);
+            background: rgba(255, 165, 0, 0.15);
             color: #ffa500;
+            border: 1px solid rgba(255, 165, 0, 0.3);
         }
 
         .status-approved {
-            background: rgba(0, 255, 0, 0.2);
+            background: rgba(0, 255, 0, 0.15);
             color: #00ff00;
+            border: 1px solid rgba(0, 255, 0, 0.3);
         }
 
         .status-rejected {
-            background: rgba(255, 0, 0, 0.2);
+            background: rgba(255, 0, 0, 0.15);
             color: #ff5555;
+            border: 1px solid rgba(255, 0, 0, 0.3);
         }
 
         .admin-controls {
             display: flex;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
         }
 
         .btn-sm {
-            padding: 8px 15px;
+            padding: 10px 20px;
             font-size: 0.9rem;
+            border-radius: 6px;
         }
 
         .btn-approve {
-            background: linear-gradient(45deg, #00ff00, #00cc00);
+            background: linear-gradient(135deg, #008000 0%, #00aa00 100%);
         }
 
         .btn-reject {
-            background: linear-gradient(45deg, #ff0000, #cc0000);
+            background: linear-gradient(135deg, #8b0000 0%, #cc0000 100%);
+        }
+
+        .btn-view {
+            background: linear-gradient(135deg, #1e90ff 0%, #4169e1 100%);
+        }
+
+        .btn-delete {
+            background: linear-gradient(135deg, #4b0082 0%, #6a0dad 100%);
         }
 
         /* Модальное окно */
@@ -338,7 +398,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             justify-content: center;
             align-items: center;
             z-index: 2000;
@@ -349,79 +409,117 @@
         }
 
         .modal-content {
-            background: rgba(20, 10, 30, 0.95);
-            border: 2px solid #ff00ff;
-            border-radius: 20px;
-            padding: 30px;
+            background: rgba(20, 15, 35, 0.95);
+            border: 2px solid #8a2be2;
+            border-radius: 12px;
+            padding: 40px;
             width: 90%;
-            max-width: 400px;
-            box-shadow: 0 0 50px rgba(255, 0, 255, 0.5);
+            max-width: 450px;
+            box-shadow: 0 0 60px rgba(138, 43, 226, 0.4);
         }
 
         .modal-title {
-            color: #ff00ff;
-            margin-bottom: 20px;
+            color: #9370db;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Статистика */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(40, 35, 60, 0.7);
+            border: 1px solid #6a0dad;
+            border-radius: 10px;
+            padding: 20px;
             text-align: center;
         }
 
-        /* Анимации */
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 255, 0.3); }
-            50% { box-shadow: 0 0 30px rgba(255, 0, 255, 0.6); }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #8a2be2;
+            margin-bottom: 10px;
         }
 
-        .glowing-border {
-            animation: glow 3s infinite;
+        /* Позиции */
+        .positions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .position-item {
+            background: rgba(30, 25, 45, 0.7);
+            border: 1px solid #6a0dad;
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .position-item:hover {
+            border-color: #9370db;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.3);
+        }
+
+        .position-item h3 {
+            color: #9370db;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .position-item p {
+            color: #b19cd9;
+            line-height: 1.6;
         }
 
         /* Футер */
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 30px;
             color: #888;
-            border-top: 1px solid rgba(255, 0, 255, 0.2);
-            margin-top: 40px;
-        }
-
-        /* Информация о должностях */
-        .positions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .position-item {
-            background: rgba(255, 0, 255, 0.1);
-            border: 1px solid rgba(255, 0, 255, 0.3);
-            border-radius: 15px;
-            padding: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .position-item:hover {
-            transform: translateY(-5px);
-            border-color: #ff00ff;
+            border-top: 1px solid rgba(75, 0, 130, 0.3);
+            margin-top: 50px;
+            background: rgba(10, 10, 20, 0.8);
         }
 
         /* Адаптивность */
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
-                gap: 15px;
+                gap: 20px;
             }
             
             nav {
                 width: 100%;
                 justify-content: center;
+                flex-wrap: wrap;
             }
             
-            .form-card {
-                padding: 20px;
+            .form-card, .admin-card {
+                padding: 25px;
             }
             
             .admin-controls {
                 flex-direction: column;
+            }
+            
+            .logo h1 {
+                font-size: 2rem;
+            }
+            
+            .form-title {
+                font-size: 1.7rem;
             }
         }
     </style>
@@ -433,12 +531,12 @@
             <div class="container">
                 <div class="header-content">
                     <div class="logo">
-                        <div class="logo-icon neon-text">✨</div>
-                        <h1 class="neon-text">Majestic DM</h1>
+                        <div class="logo-icon">⚡</div>
+                        <h1 class="neon-text">MAJESTIC DM</h1>
                     </div>
                     <nav>
-                        <button class="nav-btn active" onclick="showPage('main')">🎯 Подать заявку</button>
-                        <button class="nav-btn" onclick="showAdminLogin()">🔐 Админ-панель</button>
+                        <button class="nav-btn active" onclick="showPage('main')">📄 ПОДАТЬ ЗАЯВКУ</button>
+                        <button class="nav-btn" onclick="showAdminLogin()">🔐 АДМИН ПАНЕЛЬ</button>
                     </nav>
                 </div>
             </div>
@@ -447,56 +545,67 @@
         <!-- Главная страница -->
         <main class="container">
             <div id="mainPage" class="page active">
-                <div class="form-card glowing-border">
-                    <h2 class="form-title neon-text">📝 Заявка в команду Majestic DM</h2>
+                <div class="form-card">
+                    <h2 class="form-title">ЗАЯВКА В КОМАНДУ</h2>
+                    
+                    <!-- Возрастной барьер -->
+                    <div class="age-warning">
+                        <span class="neon-cyan">⚠ ВОЗРАСТ ОТ 12 ДО 18 ЛЕТ</span>
+                        <p style="margin-top: 8px; font-size: 0.9rem;">Только для участников 12-18 лет</p>
+                    </div>
                     
                     <form id="applicationForm">
                         <!-- Основные вопросы -->
                         <div class="form-group">
                             <label class="form-label">
-                                <span class="form-icon">🎭</span>
-                                Выберите должность:
+                                <span class="form-icon">🎯</span>
+                                ВЫБЕРИТЕ ДОЛЖНОСТЬ:
                             </label>
                             <select class="form-select" id="position" required>
-                                <option value="">-- Выберите вашу роль --</option>
-                                <option value="Главный Администратор">👑 Главный Администратор</option>
-                                <option value="Старший Модератор">🛡️ Старший Модератор</option>
-                                <option value="Куратор Ивентов">🎪 Куратор Ивентов</option>
-                                <option value="Ведомый Модератор">👥 Ведомый Модератор</option>
-                                <option value="Креативный Билдер">🏗️ Креативный Билдер</option>
-                                <option value="Технический Тестер">🔧 Технический Тестер</option>
-                                <option value="Дизайнер">🎨 Дизайнер</option>
-                                <option value="Скриптер">⚡ Скриптер</option>
+                                <option value="">-- ВЫБЕРИТЕ РОЛЬ --</option>
+                                <option value="ГЛАВНЫЙ АДМИНИСТРАТОР">👑 ГЛАВНЫЙ АДМИНИСТРАТОР</option>
+                                <option value="СТАРШИЙ МОДЕРАТОР">🛡️ СТАРШИЙ МОДЕРАТОР</option>
+                                <option value="ВЕДОМЫЙ МОДЕРАТОР">👥 ВЕДОМЫЙ МОДЕРАТОР</option>
+                                <option value="КРЕАТИВНЫЙ БИЛДЕР">🏗️ КРЕАТИВНЫЙ БИЛДЕР</option>
+                                <option value="ТЕХНИЧЕСКИЙ ТЕСТЕР">🔧 ТЕХНИЧЕСКИЙ ТЕСТЕР</option>
+                                <option value="ГЛАВНЫЙ ДИЗАЙНЕР">🎨 ГЛАВНЫЙ ДИЗАЙНЕР</option>
+                                <option value="СКРИПТЕР">⚡ СКРИПТЕР</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">
                                 <span class="form-icon">🎂</span>
-                                Сколько вам лет?
+                                СКОЛЬКО ВАМ ЛЕТ? (12-18):
                             </label>
-                            <input type="number" class="form-input" id="age" min="14" max="70" required>
+                            <input type="number" class="form-input" id="age" min="12" max="18" required 
+                                   oninput="validateAge(this)">
+                            <div style="margin-top: 8px; font-size: 0.9rem; color: #9370db;">
+                                Только для участников от 12 до 18 лет включительно
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">
                                 <span class="form-icon">👤</span>
-                                Ваш уникальный никнейм:
+                                ВАШ НИКНЕЙМ:
                             </label>
-                            <input type="text" class="form-input" id="nickname" required>
+                            <input type="text" class="form-input" id="nickname" required 
+                                   placeholder="Например: Dark_Majesty">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">
                                 <span class="form-icon">💬</span>
-                                Discord (username#0000):
+                                DISCORD:
                             </label>
-                            <input type="text" class="form-input" id="discord" required placeholder="majestic_dm#1234">
+                            <input type="text" class="form-input" id="discord" required 
+                                   placeholder="username#0000">
                         </div>
 
                         <!-- Кнопка для дополнительных вопросов -->
                         <button type="button" class="toggle-questions-btn" onclick="toggleQuestions()">
-                            📋 Показать дополнительные вопросы (15+)
+                            📋 ПОКАЗАТЬ ДОПОЛНИТЕЛЬНЫЕ ВОПРОСЫ
                         </button>
 
                         <!-- Скрытые вопросы -->
@@ -504,139 +613,160 @@
                             <div class="form-group">
                                 <label class="form-label">
                                     <span class="form-icon">⏰</span>
-                                    Сколько часов в день готовы уделять проекту?
+                                    СКОЛЬКО ВРЕМЕНИ МОЖЕТЕ УДЕЛЯТЬ?
                                 </label>
                                 <select class="form-select" id="time">
-                                    <option value="">-- Выберите --</option>
-                                    <option value="2-3 часа">2-3 часа</option>
-                                    <option value="4-5 часов">4-5 часов</option>
-                                    <option value="6+ часов">6+ часов</option>
-                                    <option value="Весь день">Весь день</option>
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="1-2 часа в день">1-2 часа в день</option>
+                                    <option value="3-4 часа в день">3-4 часа в день</option>
+                                    <option value="5+ часов в день">5+ часов в день</option>
+                                    <option value="Только по выходным">Только по выходным</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">
                                     <span class="form-icon">📅</span>
-                                    Когда можете приступить к работе?
+                                    КОГДА МОЖЕТЕ ПРИСТУПИТЬ?
                                 </label>
                                 <input type="date" class="form-input" id="startDate">
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">
-                                    <span class="form-icon">🎯</span>
-                                    Какой ваш часовой пояс?
+                                    <span class="form-icon">🌍</span>
+                                    ЧАСОВОЙ ПОЯС:
                                 </label>
-                                <input type="text" class="form-input" id="timezone" placeholder="МСК +3">
+                                <select class="form-select" id="timezone">
+                                    <option value="">-- ВЫБЕРИТЕ ПОЯС --</option>
+                                    <option value="МСК">МСК (Москва)</option>
+                                    <option value="МСК+1">МСК+1</option>
+                                    <option value="МСК+2">МСК+2</option>
+                                    <option value="МСК+3">МСК+3</option>
+                                    <option value="МСК+4">МСК+4</option>
+                                    <option value="МСК+5">МСК+5</option>
+                                    <option value="МСК+6">МСК+6</option>
+                                    <option value="МСК+7">МСК+7</option>
+                                </select>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">
                                     <span class="form-icon">💼</span>
-                                    Опыт работы на подобной должности:
+                                    ОПЫТ РАБОТЫ НА ПОХОЖИХ ДОЛЖНОСТЯХ:
                                 </label>
-                                <textarea class="form-textarea" id="experience" rows="3"></textarea>
+                                <textarea class="form-textarea" id="experience" rows="3" 
+                                          placeholder="Опишите ваш предыдущий опыт..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="form-icon">🎯</span>
+                                    ПОЧЕМУ ХОТИТЕ ИМЕННО ЭТУ ДОЛЖНОСТЬ?
+                                </label>
+                                <textarea class="form-textarea" id="positionReason" rows="3" 
+                                          placeholder="Почему выбрали именно эту роль?"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">
                                     <span class="form-icon">🔥</span>
-                                    Почему именно вы должны получить эту должность?
+                                    ВАША МОТИВАЦИЯ:
                                 </label>
-                                <textarea class="form-textarea" id="motivation" rows="3"></textarea>
+                                <textarea class="form-textarea" id="motivation" rows="3" 
+                                          placeholder="Что мотивирует вас работать в нашем проекте?"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">
                                     <span class="form-icon">💡</span>
-                                    Ваши уникальные идеи для проекта:
+                                    ИДЕИ ДЛЯ УЛУЧШЕНИЯ ПРОЕКТА:
                                 </label>
-                                <textarea class="form-textarea" id="ideas" rows="3"></textarea>
+                                <textarea class="form-textarea" id="ideas" rows="3" 
+                                          placeholder="Какие улучшения вы бы предложили?"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">
                                     <span class="form-icon">🎮</span>
-                                    Любимые игры/проекты где участвовали:
+                                    ЛЮБИМЫЕ ПРОЕКТЫ/СЕРВЕРА ГДЕ БЫЛИ:
                                 </label>
-                                <textarea class="form-textarea" id="favoriteGames" rows="3"></textarea>
+                                <textarea class="form-textarea" id="previousProjects" rows="3" 
+                                          placeholder="Где вы ранее играли или работали?"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">
                                     <span class="form-icon">⚔️</span>
-                                    Ваши сильные стороны:
+                                    ВАШИ СИЛЬНЫЕ СТОРОНЫ:
                                 </label>
-                                <textarea class="form-textarea" id="strengths" rows="3"></textarea>
+                                <textarea class="form-textarea" id="strengths" rows="3" 
+                                          placeholder="В чем вы особенно хороши?"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">
                                     <span class="form-icon">🎭</span>
-                                    Слабости, над которыми работаете:
+                                    СЛАБЫЕ СТОРОНЫ:
                                 </label>
-                                <textarea class="form-textarea" id="weaknesses" rows="3"></textarea>
+                                <textarea class="form-textarea" id="weaknesses" rows="3" 
+                                          placeholder="Над чем вам нужно работать?"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">
                                     <span class="form-icon">🏆</span>
-                                    Ваши достижения в подобных проектах:
+                                    ДОСТИЖЕНИЯ:
                                 </label>
-                                <textarea class="form-textarea" id="achievements" rows="3"></textarea>
+                                <textarea class="form-textarea" id="achievements" rows="3" 
+                                          placeholder="Чем можете похвастаться?"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">
                                     <span class="form-icon">🤝</span>
-                                    Как решаете конфликты в команде?
+                                    РАБОТА В КОМАНДЕ:
                                 </label>
-                                <textarea class="form-textarea" id="conflictResolution" rows="3"></textarea>
+                                <textarea class="form-textarea" id="teamwork" rows="3" 
+                                          placeholder="Как вы работаете в команде?"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">
                                     <span class="form-icon">📊</span>
-                                    Уровень английского языка:
+                                    УРОВЕНЬ АНГЛИЙСКОГО:
                                 </label>
                                 <select class="form-select" id="englishLevel">
-                                    <option value="">-- Выберите --</option>
-                                    <option value="Начальный">Начальный</option>
-                                    <option value="Средний">Средний</option>
-                                    <option value="Продвинутый">Продвинутый</option>
-                                    <option value="Носитель">Носитель</option>
+                                    <option value="">-- ВЫБЕРИТЕ --</option>
+                                    <option value="НУЛЕВОЙ">Нулевой</option>
+                                    <option value="НАЧАЛЬНЫЙ">Начальный (A1-A2)</option>
+                                    <option value="СРЕДНИЙ">Средний (B1-B2)</option>
+                                    <option value="ПРОДВИНУТЫЙ">Продвинутый (C1-C2)</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">
                                     <span class="form-icon">🔗</span>
-                                    Ссылки на портфолио/работы:
+                                    ССЫЛКИ НА РАБОТЫ/ПОРТФОЛИО:
                                 </label>
-                                <textarea class="form-textarea" id="portfolio" rows="2"></textarea>
+                                <textarea class="form-textarea" id="portfolio" rows="2" 
+                                          placeholder="Ссылки на ваши работы (если есть)"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">
                                     <span class="form-icon">🎯</span>
-                                    Чего хотите достичь в нашем проекте?
+                                    ЦЕЛИ В ПРОЕКТЕ:
                                 </label>
-                                <textarea class="form-textarea" id="goals" rows="3"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">💬</span>
-                                    Есть ли вопросы к нам?
-                                </label>
-                                <textarea class="form-textarea" id="questions" rows="3"></textarea>
+                                <textarea class="form-textarea" id="goals" rows="3" 
+                                          placeholder="Чего хотите достичь?"></textarea>
                             </div>
                         </div>
 
                         <button type="submit" class="btn">
                             <span class="form-icon">🚀</span>
-                            Отправить заявку
+                            ОТПРАВИТЬ ЗАЯВКУ
                         </button>
                     </form>
                 </div>
@@ -644,34 +774,50 @@
                 <!-- Информация о должностях -->
                 <div class="positions-grid">
                     <div class="position-item">
-                        <h3 class="neon-pink">👑 Главный Администратор</h3>
-                        <p>Полный контроль, управление командой, стратегическое планирование</p>
+                        <h3 class="neon-purple">👑 ГЛАВНЫЙ АДМИНИСТРАТОР</h3>
+                        <p>Полный контроль над проектом, управление командой, стратегическое планирование и развитие.</p>
                     </div>
                     <div class="position-item">
-                        <h3 class="neon-pink">🛡️ Старший Модератор</h3>
-                        <p>Контроль модерации, обучение команды, решение сложных ситуаций</p>
+                        <h3 class="neon-purple">🛡️ СТАРШИЙ МОДЕРАТОР</h3>
+                        <p>Контроль модерации, обучение команды, решение сложных ситуаций и разработка правил.</p>
                     </div>
                     <div class="position-item">
-                        <h3 class="neon-pink">🎪 Куратор Ивентов</h3>
-                        <p>Организация мероприятий, создание уникального контента</p>
+                        <h3 class="neon-purple">🏗️ КРЕАТИВНЫЙ БИЛДЕР</h3>
+                        <p>Создание уникальных построек, дизайн карт, работа с ландшафтом и архитектурой.</p>
                     </div>
                     <div class="position-item">
-                        <h3 class="neon-pink">🏗️ Креативный Билдер</h3>
-                        <p>Создание миров, дизайн карт, архитектурные решения</p>
+                        <h3 class="neon-purple">🔧 ТЕХНИЧЕСКИЙ ТЕСТЕР</h3>
+                        <p>Поиск багов, тестирование обновлений, анализ стабильности и производительности.</p>
                     </div>
                 </div>
             </div>
 
             <!-- Админ-панель -->
             <div id="adminPage" class="page">
-                <div class="form-card">
-                    <h2 class="form-title neon-text">🔐 Панель управления заявками</h2>
+                <div class="admin-card">
+                    <h2 class="form-title">🔐 ПАНЕЛЬ УПРАВЛЕНИЯ</h2>
                     
-                    <div class="admin-stats" style="margin-bottom: 20px;">
-                        <p class="neon-pink">Всего заявок: <span id="totalCount">0</span></p>
-                        <p class="neon-pink">На рассмотрении: <span id="pendingCount">0</span></p>
+                    <!-- Статистика -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="totalCount">0</div>
+                            <div class="neon-cyan">ВСЕГО ЗАЯВОК</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="pendingCount">0</div>
+                            <div class="neon-cyan">НА РАССМОТРЕНИИ</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="age1214">0</div>
+                            <div class="neon-cyan">ВОЗРАСТ 12-14</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="age1518">0</div>
+                            <div class="neon-cyan">ВОЗРАСТ 15-18</div>
+                        </div>
                     </div>
                     
+                    <!-- Список заявок -->
                     <div id="applicationsList">
                         <!-- Заявки будут загружены здесь -->
                     </div>
@@ -681,12 +827,13 @@
 
         <!-- Модальное окно пароля -->
         <div id="passwordModal" class="modal">
-            <div class="modal-content glowing-border">
-                <h3 class="modal-title neon-text">🔒 Вход в админ-панель</h3>
-                <input type="password" id="adminPassword" class="form-input" placeholder="Введите пароль администратора">
-                <div style="display: flex; gap: 10px; margin-top: 20px;">
-                    <button class="btn" onclick="checkPassword()">Войти</button>
-                    <button class="btn btn-secondary" onclick="hideModal()">Отмена</button>
+            <div class="modal-content">
+                <h3 class="modal-title neon-text">🔒 ДОСТУП К АДМИН ПАНЕЛИ</h3>
+                <input type="password" id="adminPassword" class="form-input" 
+                       placeholder="ВВЕДИТЕ ПАРОЛЬ АДМИНИСТРАТОРА">
+                <div style="display: flex; gap: 15px; margin-top: 25px;">
+                    <button class="btn" onclick="checkPassword()">ВОЙТИ</button>
+                    <button class="btn btn-delete" onclick="hideModal()">ОТМЕНА</button>
                 </div>
             </div>
         </div>
@@ -694,8 +841,10 @@
         <!-- Футер -->
         <footer>
             <div class="container">
-                <p class="neon-pink">Majestic DM © 2024 | Система заявок v2.0</p>
-                <p style="color: #ffb6c1; margin-top: 10px;">Все заявки хранятся в вашем браузере</p>
+                <p class="neon-purple">MAJESTIC DM © 2024 | СИСТЕМА ЗАЯВОК</p>
+                <p style="color: #9370db; margin-top: 15px; font-size: 0.9rem;">
+                    Для участников 12-18 лет | Все данные хранятся локально
+                </p>
             </div>
         </footer>
     </div>
@@ -703,7 +852,29 @@
     <script>
         // Конфигурация
         const STORAGE_KEY = 'majestic_dm_applications';
-        const ADMIN_PASSWORD = 'majestic2024'; // Поменяйте этот пароль!
+        const ADMIN_PASSWORD = 'MAJESTIC2024'; // Поменяйте этот пароль!
+
+        // Валидация возраста
+        function validateAge(input) {
+            const age = parseInt(input.value);
+            const ageWarning = document.querySelector('.age-warning .neon-cyan');
+            
+            if (age < 12 || age > 18) {
+                input.style.borderColor = '#ff4444';
+                input.style.boxShadow = '0 0 10px rgba(255, 68, 68, 0.5)';
+                if (ageWarning) {
+                    ageWarning.style.color = '#ff4444';
+                    ageWarning.textContent = '⚠ ВОЗРАСТ ДОЛЖЕН БЫТЬ 12-18!';
+                }
+            } else {
+                input.style.borderColor = '#00ced1';
+                input.style.boxShadow = '0 0 10px rgba(0, 206, 209, 0.5)';
+                if (ageWarning) {
+                    ageWarning.style.color = '#00ced1';
+                    ageWarning.textContent = '✅ ВОЗРАСТ ПОДХОДИТ';
+                }
+            }
+        }
 
         // Показать/скрыть страницы
         function showPage(pageId) {
@@ -728,16 +899,17 @@
             
             if (questionsVisible) {
                 questionsDiv.classList.add('show');
-                toggleBtn.innerHTML = '📋 Скрыть дополнительные вопросы';
+                toggleBtn.innerHTML = '📋 СКРЫТЬ ДОПОЛНИТЕЛЬНЫЕ ВОПРОСЫ';
             } else {
                 questionsDiv.classList.remove('show');
-                toggleBtn.innerHTML = '📋 Показать дополнительные вопросы (15+)';
+                toggleBtn.innerHTML = '📋 ПОКАЗАТЬ ДОПОЛНИТЕЛЬНЫЕ ВОПРОСЫ';
             }
         }
 
         // Модальное окно
         function showAdminLogin() {
             document.getElementById('passwordModal').classList.add('active');
+            document.getElementById('adminPassword').focus();
         }
 
         function hideModal() {
@@ -752,193 +924,6 @@
                 hideModal();
                 showPage('admin');
             } else {
-                alert('❌ Неверный пароль!');
-                document.getElementById('adminPassword').value = '';
-            }
-        }
+                alert('❌ НЕВЕРНЫЙ ПАРОЛЬ!');
 
-        // Отправка заявки
-        document.getElementById('applicationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const application = {
-                id: Date.now(),
-                position: document.getElementById('position').value,
-                age: document.getElementById('age').value,
-                nickname: document.getElementById('nickname').value,
-                discord: document.getElementById('discord').value,
-                time: document.getElementById('time').value,
-                startDate: document.getElementById('startDate').value,
-                timezone: document.getElementById('timezone').value,
-                experience: document.getElementById('experience').value,
-                motivation: document.getElementById('motivation').value,
-                ideas: document.getElementById('ideas').value,
-                favoriteGames: document.getElementById('favoriteGames').value,
-                strengths: document.getElementById('strengths').value,
-                weaknesses: document.getElementById('weaknesses').value,
-                achievements: document.getElementById('achievements').value,
-                conflictResolution: document.getElementById('conflictResolution').value,
-                englishLevel: document.getElementById('englishLevel').value,
-                portfolio: document.getElementById('portfolio').value,
-                goals: document.getElementById('goals').value,
-                questions: document.getElementById('questions').value,
-                status: 'pending',
-                date: new Date().toLocaleString('ru-RU')
-            };
-
-            // Проверка возраста
-            if (application.age < 14 || application.age > 70) {
-                alert('❌ Возраст должен быть от 14 до 70 лет!');
-                return;
-            }
-
-            // Сохранение
-            let applications = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-            applications.unshift(application); // Добавляем в начало
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(applications));
-            
-            // Очистка формы
-            this.reset();
-            if (questionsVisible) toggleQuestions();
-            
-            // Анимация успеха
-            const submitBtn = this.querySelector('.btn');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '✅ Отправлено!';
-            submitBtn.style.background = 'linear-gradient(45deg, #00ff00, #00cc00)';
-            
-            setTimeout(() => {
-                submitBtn.innerHTML = originalText;
-                submitBtn.style.background = 'linear-gradient(45deg, #ff00ff, #ff1493)';
-            }, 2000);
-            
-            alert(`✨ Заявка #${application.id} отправлена!`);
-        });
-
-        // Загрузка заявок в админке
-        function loadApplications() {
-            const applications = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-            const container = document.getElementById('applicationsList');
-            
-            // Статистика
-            document.getElementById('totalCount').textContent = applications.length;
-            document.getElementById('pendingCount').textContent = 
-                applications.filter(app => app.status === 'pending').length;
-
-            if (applications.length === 0) {
-                container.innerHTML = '<p class="neon-pink">📭 Нет заявок для рассмотрения</p>';
-                return;
-            }
-
-            let html = '';
-            applications.forEach(app => {
-                const statusClass = `status-${app.status}`;
-                const statusText = {
-                    'pending': '⏳ На рассмотрении',
-                    'approved': '✅ Одобрено',
-                    'rejected': '❌ Отклонено'
-                }[app.status];
-
-                html += `
-                    <div class="application-card">
-                        <div class="application-header">
-                            <h3 class="neon-pink">${app.position} | ${app.nickname} (${app.age})</h3>
-                            <span class="application-status ${statusClass}">${statusText}</span>
-                        </div>
-                        
-                        <p><strong>Discord:</strong> ${app.discord}</p>
-                        ${app.time ? `<p><strong>Время:</strong> ${app.time}</p>` : ''}
-                        ${app.timezone ? `<p><strong>Часовой пояс:</strong> ${app.timezone}</p>` : ''}
-                        ${app.experience ? `<p><strong>Опыт:</strong> ${app.experience.substring(0, 100)}...</p>` : ''}
-                        ${app.motivation ? `<p><strong>Мотивация:</strong> ${app.motivation.substring(0, 100)}...</p>` : ''}
-                        
-                        <p><small>📅 ${app.date}</small></p>
-                        
-                        ${app.status === 'pending' ? `
-                            <div class="admin-controls">
-                                <button class="btn btn-sm btn-approve" onclick="updateStatus(${app.id}, 'approved')">
-                                    ✅ Одобрить
-                                </button>
-                                <button class="btn btn-sm btn-reject" onclick="updateStatus(${app.id}, 'rejected')">
-                                    ❌ Отклонить
-                                </button>
-                                <button class="btn btn-sm btn-secondary" onclick="viewApplication(${app.id})">
-                                    👁️ Просмотр
-                                </button>
-                                <button class="btn btn-sm" onclick="deleteApplication(${app.id})" style="background: #555;">
-                                    🗑️ Удалить
-                                </button>
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            });
-            
-            container.innerHTML = html;
-        }
-
-        // Обновление статуса
-        function updateStatus(id, status) {
-            if (!confirm(`Вы уверены, что хотите ${status === 'approved' ? 'одобрить' : 'отклонить'} эту заявку?`)) {
-                return;
-            }
-
-            let applications = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-            applications = applications.map(app => app.id === id ? {...app, status} : app);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(applications));
-            
-            loadApplications();
-            alert(`Заявка ${status === 'approved' ? 'одобрена' : 'отклонена'}!`);
-        }
-
-        // Просмотр полной заявки
-        function viewApplication(id) {
-            const applications = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-            const app = applications.find(a => a.id === id);
-            
-            if (!app) return;
-            
-            let details = `🎯 Должность: ${app.position}\n`;
-            details += `👤 Никнейм: ${app.nickname}\n`;
-            details += `🎂 Возраст: ${app.age}\n`;
-            details += `💬 Discord: ${app.discord}\n`;
-            details += `⏰ Время: ${app.time || 'Не указано'}\n`;
-            details += `📅 Начало: ${app.startDate || 'Не указано'}\n`;
-            details += `🌍 Часовой пояс: ${app.timezone || 'Не указано'}\n`;
-            details += `🏆 Опыт: ${app.experience || 'Не указано'}\n`;
-            details += `🔥 Мотивация: ${app.motivation || 'Не указано'}\n`;
-            details += `💡 Идеи: ${app.ideas || 'Не указано'}\n`;
-            details += `📅 Дата подачи: ${app.date}\n`;
-            details += `📊 Статус: ${app.status === 'pending' ? '⏳ На рассмотрении' : app.status === 'approved' ? '✅ Одобрено' : '❌ Отклонено'}`;
-            
-            alert(details);
-        }
-
-        // Удаление заявки
-        function deleteApplication(id) {
-            if (!confirm('❌ Удалить эту заявку навсегда?')) return;
-            
-            let applications = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-            applications = applications.filter(app => app.id !== id);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(applications));
-            
-            loadApplications();
-            alert('🗑️ Заявка удалена!');
-        }
-
-        // Инициализация
-        document.addEventListener('DOMContentLoaded', () => {
-            // Проверяем хэш для быстрого доступа к админке
-            if (window.location.hash === '#admin') {
-                showAdminLogin();
-            }
-            
-            // Загружаем текущие заявки если есть
-            const applications = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-            if (applications.length > 0) {
-                console.log(`📊 Загружено ${applications.length} заявок`);
-            }
-        });
-    </script>
-</body>
-</html>
+               
