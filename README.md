@@ -54,7 +54,7 @@
                 0 0 10px #008b8b;
         }
 
-        /* Шапка - стильный минимализм */
+        /* Шапка */
         header {
             background: rgba(10, 10, 20, 0.95);
             border-bottom: 1px solid #4b0082;
@@ -563,12 +563,10 @@
                             </label>
                             <select class="form-select" id="position" required>
                                 <option value="">-- ВЫБЕРИТЕ РОЛЬ --</option>
-                                <option value="ГЛАВНЫЙ АДМИНИСТРАТОР">👑 ГЛАВНЫЙ АДМИНИСТРАТОР</option>
-                                <option value="СТАРШИЙ МОДЕРАТОР">🛡️ СТАРШИЙ МОДЕРАТОР</option>
-                                <option value="ВЕДОМЫЙ МОДЕРАТОР">👥 ВЕДОМЫЙ МОДЕРАТОР</option>
-                                <option value="КРЕАТИВНЫЙ БИЛДЕР">🏗️ КРЕАТИВНЫЙ БИЛДЕР</option>
-                                <option value="ТЕХНИЧЕСКИЙ ТЕСТЕР">🔧 ТЕХНИЧЕСКИЙ ТЕСТЕР</option>
-                                <option value="ГЛАВНЫЙ ДИЗАЙНЕР">🎨 ГЛАВНЫЙ ДИЗАЙНЕР</option>
+                                <option value="АДМИНИСТРАТОР">👑 АДМИНИСТРАТОР</option>
+                                <option value="МОДЕРАТОР">🛡️ МОДЕРАТОР</option>
+                                <option value="БИЛДЕР">🏗️ БИЛДЕР</option>
+                                <option value="ТЕСТЕР">🔧 ТЕСТЕР</option>
                                 <option value="СКРИПТЕР">⚡ СКРИПТЕР</option>
                             </select>
                         </div>
@@ -596,11 +594,11 @@
 
                         <div class="form-group">
                             <label class="form-label">
-                                <span class="form-icon">💬</span>
-                                DISCORD:
+                                <span class="form-icon">📱</span>
+                                TELEGRAM (@username):
                             </label>
-                            <input type="text" class="form-input" id="discord" required 
-                                   placeholder="username#0000">
+                            <input type="text" class="form-input" id="telegram" required 
+                                   placeholder="@username или t.me/username">
                         </div>
 
                         <!-- Кнопка для дополнительных вопросов -->
@@ -626,55 +624,47 @@
 
                             <div class="form-group">
                                 <label class="form-label">
-                                    <span class="form-icon">📅</span>
-                                    КОГДА МОЖЕТЕ ПРИСТУПИТЬ?
-                                </label>
-                                <input type="date" class="form-input" id="startDate">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">🌍</span>
-                                    ЧАСОВОЙ ПОЯС:
-                                </label>
-                                <select class="form-select" id="timezone">
-                                    <option value="">-- ВЫБЕРИТЕ ПОЯС --</option>
-                                    <option value="МСК">МСК (Москва)</option>
-                                    <option value="МСК+1">МСК+1</option>
-                                    <option value="МСК+2">МСК+2</option>
-                                    <option value="МСК+3">МСК+3</option>
-                                    <option value="МСК+4">МСК+4</option>
-                                    <option value="МСК+5">МСК+5</option>
-                                    <option value="МСК+6">МСК+6</option>
-                                    <option value="МСК+7">МСК+7</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">
                                     <span class="form-icon">💼</span>
                                     ОПЫТ РАБОТЫ НА ПОХОЖИХ ДОЛЖНОСТЯХ:
                                 </label>
                                 <textarea class="form-textarea" id="experience" rows="3" 
-                                          placeholder="Опишите ваш предыдущий опыт..."></textarea>
+                                          placeholder="Где и кем работали ранее? Какой был опыт?"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">
-                                    <span class="form-icon">🎯</span>
-                                    ПОЧЕМУ ХОТИТЕ ИМЕННО ЭТУ ДОЛЖНОСТЬ?
+                                    <span class="form-icon">❓</span>
+                                    ПОЧЕМУ ИМЕННО МЫ? ЧЕМ ПОНРАВИЛСЯ ПРОЕКТ?
                                 </label>
-                                <textarea class="form-textarea" id="positionReason" rows="3" 
-                                          placeholder="Почему выбрали именно эту роль?"></textarea>
+                                <textarea class="form-textarea" id="whyUs" rows="3" 
+                                          placeholder="Почему выбрали именно наш проект? Что вам в нем нравится?"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">
-                                    <span class="form-icon">🔥</span>
-                                    ВАША МОТИВАЦИЯ:
+                                    <span class="form-icon">📜</span>
+                                    ЗНАНИЕ ПРАВИЛ ПРОЕКТА:
                                 </label>
-                                <textarea class="form-textarea" id="motivation" rows="3" 
-                                          placeholder="Что мотивирует вас работать в нашем проекте?"></textarea>
+                                <textarea class="form-textarea" id="rulesKnowledge" rows="3" 
+                                          placeholder="Знакомы ли с правилами? Какие основные правила знаете?"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="form-icon">🚫</span>
+                                    СИТУАЦИЯ: ВИДИТЕ ЧИТЕРА. ВАШИ ДЕЙСТВИЯ?
+                                </label>
+                                <textarea class="form-textarea" id="cheaterScenario" rows="3" 
+                                          placeholder="Опишите шаг за шагом ваши действия при обнаружении читера"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="form-icon">⚠️</span>
+                                    КОНФЛИКТ С ИГРОКОМ. КАК РЕШИТЕ?
+                                </label>
+                                <textarea class="form-textarea" id="conflictScenario" rows="3" 
+                                          placeholder="Игрок нарушает правила и грубит. Ваши действия?"></textarea>
                             </div>
 
                             <div class="form-group">
@@ -683,16 +673,7 @@
                                     ИДЕИ ДЛЯ УЛУЧШЕНИЯ ПРОЕКТА:
                                 </label>
                                 <textarea class="form-textarea" id="ideas" rows="3" 
-                                          placeholder="Какие улучшения вы бы предложили?"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">🎮</span>
-                                    ЛЮБИМЫЕ ПРОЕКТЫ/СЕРВЕРА ГДЕ БЫЛИ:
-                                </label>
-                                <textarea class="form-textarea" id="previousProjects" rows="3" 
-                                          placeholder="Где вы ранее играли или работали?"></textarea>
+                                          placeholder="Какие улучшения вы бы предложили для проекта?"></textarea>
                             </div>
 
                             <div class="form-group">
@@ -701,7 +682,7 @@
                                     ВАШИ СИЛЬНЫЕ СТОРОНЫ:
                                 </label>
                                 <textarea class="form-textarea" id="strengths" rows="3" 
-                                          placeholder="В чем вы особенно хороши?"></textarea>
+                                          placeholder="В чем вы особенно хороши? Какие навыки выделяют вас?"></textarea>
                             </div>
 
                             <div class="form-group">
@@ -710,16 +691,7 @@
                                     СЛАБЫЕ СТОРОНЫ:
                                 </label>
                                 <textarea class="form-textarea" id="weaknesses" rows="3" 
-                                          placeholder="Над чем вам нужно работать?"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">🏆</span>
-                                    ДОСТИЖЕНИЯ:
-                                </label>
-                                <textarea class="form-textarea" id="achievements" rows="3" 
-                                          placeholder="Чем можете похвастаться?"></textarea>
+                                          placeholder="Над чем вам нужно работать? Какие трудности испытываете?"></textarea>
                             </div>
 
                             <div class="form-group">
@@ -728,30 +700,34 @@
                                     РАБОТА В КОМАНДЕ:
                                 </label>
                                 <textarea class="form-textarea" id="teamwork" rows="3" 
-                                          placeholder="Как вы работаете в команде?"></textarea>
+                                          placeholder="Как вы работаете в команде? Легко ли находите общий язык?"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">
-                                    <span class="form-icon">📊</span>
-                                    УРОВЕНЬ АНГЛИЙСКОГО:
+                                    <span class="form-icon">🏗️</span>
+                                    ЕСЛИ БИЛДЕР: ПРИМЕРЫ РАБОТ (ССЫЛКИ):
                                 </label>
-                                <select class="form-select" id="englishLevel">
-                                    <option value="">-- ВЫБЕРИТЕ --</option>
-                                    <option value="НУЛЕВОЙ">Нулевой</option>
-                                    <option value="НАЧАЛЬНЫЙ">Начальный (A1-A2)</option>
-                                    <option value="СРЕДНИЙ">Средний (B1-B2)</option>
-                                    <option value="ПРОДВИНУТЫЙ">Продвинутый (C1-C2)</option>
-                                </select>
+                                <textarea class="form-textarea" id="builderPortfolio" rows="3" 
+                                          placeholder="Ссылки на скриншоты или видео ваших построек"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">
-                                    <span class="form-icon">🔗</span>
-                                    ССЫЛКИ НА РАБОТЫ/ПОРТФОЛИО:
+                                    <span class="form-icon">🔧</span>
+                                    ЕСЛИ ТЕСТЕР: КАК ИЩЕТЕ БАГИ?
                                 </label>
-                                <textarea class="form-textarea" id="portfolio" rows="2" 
-                                          placeholder="Ссылки на ваши работы (если есть)"></textarea>
+                                <textarea class="form-textarea" id="testerMethod" rows="3" 
+                                          placeholder="Опишите ваш метод поиска и тестирования багов"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="form-icon">⚡</span>
+                                    ЕСЛИ СКРИПТЕР: ЯЗЫКИ И НАВЫКИ:
+                                </label>
+                                <textarea class="form-textarea" id="scripterSkills" rows="3" 
+                                          placeholder="Какие языки программирования знаете? Примеры работ?"></textarea>
                             </div>
 
                             <div class="form-group">
@@ -760,7 +736,7 @@
                                     ЦЕЛИ В ПРОЕКТЕ:
                                 </label>
                                 <textarea class="form-textarea" id="goals" rows="3" 
-                                          placeholder="Чего хотите достичь?"></textarea>
+                                          placeholder="Чего хотите достичь в нашем проекте?"></textarea>
                             </div>
                         </div>
 
@@ -774,20 +750,20 @@
                 <!-- Информация о должностях -->
                 <div class="positions-grid">
                     <div class="position-item">
-                        <h3 class="neon-purple">👑 ГЛАВНЫЙ АДМИНИСТРАТОР</h3>
+                        <h3 class="neon-purple">👑 АДМИНИСТРАТОР</h3>
                         <p>Полный контроль над проектом, управление командой, стратегическое планирование и развитие.</p>
                     </div>
                     <div class="position-item">
-                        <h3 class="neon-purple">🛡️ СТАРШИЙ МОДЕРАТОР</h3>
-                        <p>Контроль модерации, обучение команды, решение сложных ситуаций и разработка правил.</p>
+                        <h3 class="neon-purple">🛡️ МОДЕРАТОР</h3>
+                        <p>Контроль за соблюдением правил, помощь игрокам, решение конфликтов, поддержание порядка.</p>
                     </div>
                     <div class="position-item">
-                        <h3 class="neon-purple">🏗️ КРЕАТИВНЫЙ БИЛДЕР</h3>
-                        <p>Создание уникальных построек, дизайн карт, работа с ландшафтом и архитектурой.</p>
+                        <h3 class="neon-purple">🏗️ БИЛДЕР</h3>
+                        <p>Создание построек, дизайн карт, работа с ландшафтом, строительство структур.</p>
                     </div>
                     <div class="position-item">
-                        <h3 class="neon-purple">🔧 ТЕХНИЧЕСКИЙ ТЕСТЕР</h3>
-                        <p>Поиск багов, тестирование обновлений, анализ стабильности и производительности.</p>
+                        <h3 class="neon-purple">🔧 ТЕСТЕР</h3>
+                        <p>Поиск багов, тестирование обновлений, проверка стабильности, составление отчетов.</p>
                     </div>
                 </div>
             </div>
@@ -808,12 +784,12 @@
                             <div class="neon-cyan">НА РАССМОТРЕНИИ</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-number" id="age1214">0</div>
-                            <div class="neon-cyan">ВОЗРАСТ 12-14</div>
+                            <div class="stat-number" id="adminsCount">0</div>
+                            <div class="neon-cyan">АДМИНИСТРАТОРЫ</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-number" id="age1518">0</div>
-                            <div class="neon-cyan">ВОЗРАСТ 15-18</div>
+                            <div class="stat-number" id="moderatorsCount">0</div>
+                            <div class="neon-cyan">МОДЕРАТОРЫ</div>
                         </div>
                     </div>
                     
@@ -923,7 +899,43 @@
             if (password === ADMIN_PASSWORD) {
                 hideModal();
                 showPage('admin');
+                loadApplications();
             } else {
                 alert('❌ НЕВЕРНЫЙ ПАРОЛЬ!');
+                document.getElementById('adminPassword').value = '';
+            }
+        }
 
-               
+        // Отправка заявки
+        document.getElementById('applicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Проверка возраста
+            const age = parseInt(document.getElementById('age').value);
+            if (age < 12 || age > 18) {
+                alert('❌ Возраст должен быть от 12 до 18 лет!');
+                return;
+            }
+
+            const application = {
+                id: Date.now(),
+                position: document.getElementById('position').value,
+                age: age,
+                nickname: document.getElementById('nickname').value,
+                telegram: document.getElementById('telegram').value,
+                time: document.getElementById('time').value,
+                experience: document.getElementById('experience').value,
+                whyUs: document.getElementById('whyUs').value,
+                rulesKnowledge: document.getElementById('rulesKnowledge').value,
+                cheaterScenario: document.getElementById('cheaterScenario').value,
+                conflictScenario: document.getElementById('conflictScenario').value,
+                ideas: document.getElementById('ideas').value,
+                strengths: document.getElementById('strengths').value,
+                weaknesses: document.getElementById('weaknesses').value,
+                teamwork: document.getElementById('teamwork').value,
+                builderPortfolio: document.getElementById('builderPortfolio').value,
+                testerMethod: document.getElementById('testerMethod').value,
+                scripterSkills: document.getElementById('scripterSkills').value,
+                goals: document.getElementById('goals').value,
+                status: 'pending',
+                date: new Date
