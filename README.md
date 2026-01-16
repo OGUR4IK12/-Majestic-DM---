@@ -27,7 +27,6 @@
             padding: 0 20px;
         }
 
-        /* Темный неон */
         .neon-text {
             color: #8a2be2;
             text-shadow:
@@ -109,6 +108,9 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-transform: uppercase;
             letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .nav-btn:hover {
@@ -209,9 +211,16 @@
         }
 
         .form-textarea {
-            min-height: 120px;
+            min-height: 100px;
             resize: vertical;
             line-height: 1.5;
+        }
+
+        .optional {
+            font-size: 0.9rem;
+            color: #9370db;
+            font-weight: normal;
+            margin-left: 5px;
         }
 
         /* Кнопки */
@@ -239,51 +248,6 @@
             background: linear-gradient(135deg, #5a00a3 0%, #9b30ff 100%);
         }
 
-        /* Кнопка просмотра вопросов */
-        .toggle-questions-btn {
-            background: rgba(40, 35, 60, 0.7);
-            color: #9370db;
-            border: 1px dashed #6a0dad;
-            padding: 14px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            margin: 20px 0;
-            width: 100%;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .toggle-questions-btn:hover {
-            background: rgba(75, 0, 130, 0.2);
-            border-style: solid;
-            border-color: #9370db;
-        }
-
-        /* Скрытые вопросы */
-        .hidden-questions {
-            display: none;
-            margin-top: 25px;
-            padding: 25px;
-            background: rgba(30, 25, 45, 0.7);
-            border-radius: 10px;
-            border-left: 4px solid #8a2be2;
-            animation: slideDown 0.5s ease;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; max-height: 0; }
-            to { opacity: 1; max-height: 2000px; }
-        }
-
-        .hidden-questions.show {
-            display: block;
-        }
-
         /* Возрастной барьер */
         .age-warning {
             background: rgba(75, 0, 130, 0.2);
@@ -296,8 +260,90 @@
             font-weight: 600;
         }
 
-        .age-warning .neon-cyan {
-            font-size: 1.2rem;
+        /* Скрытые вопросы для ролей */
+        .role-specific-questions {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(30, 25, 45, 0.7);
+            border-radius: 10px;
+            border-left: 4px solid #8a2be2;
+            animation: slideDown 0.3s ease;
+        }
+
+        .role-specific-questions.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 2000px; }
+        }
+
+        /* Страница проверки статуса */
+        .check-status-card {
+            background: rgba(20, 15, 35, 0.85);
+            border: 1px solid #4b0082;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .id-input-group {
+            max-width: 400px;
+            margin: 30px auto;
+        }
+
+        .id-display {
+            font-size: 1.8rem;
+            color: #8a2be2;
+            background: rgba(40, 35, 60, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 800;
+            letter-spacing: 2px;
+            border: 2px solid #6a0dad;
+        }
+
+        .copy-btn {
+            background: rgba(40, 35, 60, 0.7);
+            color: #9370db;
+            border: 1px solid #6a0dad;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: rgba(138, 43, 226, 0.3);
+        }
+
+        .result-card {
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 10px;
+            animation: fadeIn 0.5s ease;
+            text-align: left;
+        }
+
+        .result-pending {
+            background: rgba(255, 165, 0, 0.1);
+            border: 1px solid rgba(255, 165, 0, 0.3);
+        }
+
+        .result-approved {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .result-rejected {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
         }
 
         /* Админ-панель */
@@ -384,38 +430,6 @@
             border: 1px solid rgba(255, 0, 0, 0.3);
         }
 
-        .application-details {
-            margin-top: 15px;
-            padding: 15px;
-            background: rgba(30, 25, 45, 0.5);
-            border-radius: 8px;
-            border-left: 3px solid #9370db;
-        }
-
-        .detail-item {
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(107, 13, 173, 0.2);
-        }
-
-        .detail-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-
-        .detail-label {
-            color: #9370db;
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-bottom: 3px;
-        }
-
-        .detail-value {
-            color: #e0e0ff;
-            font-size: 1rem;
-            line-height: 1.4;
-        }
-
         .admin-controls {
             display: flex;
             gap: 12px;
@@ -445,53 +459,8 @@
             background: linear-gradient(135deg, #4b0082 0%, #6a0dad 100%);
         }
 
-        /* Модальное окно */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-
-        .modal.active {
-            display: flex;
-            animation: modalFadeIn 0.3s ease;
-        }
-
-        @keyframes modalFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal-content {
-            background: rgba(20, 15, 35, 0.95);
-            border: 2px solid #8a2be2;
-            border-radius: 12px;
-            padding: 40px;
-            width: 90%;
-            max-width: 450px;
-            box-shadow: 0 0 60px rgba(138, 43, 226, 0.4);
-            transform: scale(1);
-            animation: modalScaleIn 0.3s ease;
-        }
-
-        @keyframes modalScaleIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .modal-title {
-            color: #9370db;
-            margin-bottom: 25px;
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: 700;
+        .btn-contact {
+            background: linear-gradient(135deg, #ff69b4 0%, #db7093 100%);
         }
 
         /* Статистика */
@@ -523,6 +492,68 @@
             margin-bottom: 10px;
         }
 
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: rgba(20, 15, 35, 0.95);
+            border: 2px solid #8a2be2;
+            border-radius: 12px;
+            padding: 40px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 0 60px rgba(138, 43, 226, 0.4);
+        }
+
+        .modal-title {
+            color: #9370db;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Нотификации */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(20, 15, 35, 0.95);
+            border: 1px solid #4b0082;
+            border-left: 5px solid #00ced1;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            z-index: 3000;
+            max-width: 400px;
+            animation: slideInRight 0.3s ease;
+            display: none;
+        }
+
+        .notification.show {
+            display: block;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
         /* Позиции */
         .positions-grid {
             display: grid;
@@ -543,18 +574,6 @@
             border-color: #9370db;
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(138, 43, 226, 0.3);
-        }
-
-        .position-item h3 {
-            color: #9370db;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-
-        .position-item p {
-            color: #b19cd9;
-            line-height: 1.6;
         }
 
         /* Футер */
@@ -580,7 +599,7 @@
                 flex-wrap: wrap;
             }
             
-            .form-card, .admin-card {
+            .form-card, .admin-card, .check-status-card {
                 padding: 25px;
             }
             
@@ -620,8 +639,15 @@
                         <h1 class="neon-text">LAIMEWORLD</h1>
                     </div>
                     <nav>
-                        <button class="nav-btn active" onclick="showPage('main')">📄 ПОДАТЬ ЗАЯВКУ</button>
-                        <button class="nav-btn" onclick="showAdminLogin()">🔐 АДМИН ПАНЕЛЬ</button>
+                        <button class="nav-btn active" onclick="showPage('main')">
+                            📄 ПОДАТЬ ЗАЯВКУ
+                        </button>
+                        <button class="nav-btn" onclick="showPage('check')">
+                            🔍 ПРОВЕРИТЬ СТАТУС
+                        </button>
+                        <button class="nav-btn" onclick="showAdminLogin()">
+                            🔐 АДМИН ПАНЕЛЬ
+                        </button>
                     </nav>
                 </div>
             </div>
@@ -635,8 +661,8 @@
                     
                     <!-- Возрастной барьер -->
                     <div class="age-warning">
-                        <span class="neon-cyan">⚠ ВОЗРАСТ ОТ 12 ДО 18 ЛЕТ</span>
-                        <p style="margin-top: 8px; font-size: 0.9rem;">Только для участников 12-18 лет</p>
+                        <span class="neon-cyan">⚠ ВОЗРАСТ ОТ 13 ЛЕТ</span>
+                        <p style="margin-top: 8px; font-size: 0.9rem;">Минимальный возраст: 13 лет</p>
                     </div>
                     
                     <form id="applicationForm">
@@ -646,7 +672,7 @@
                                 <span class="form-icon">🎯</span>
                                 ВЫБЕРИТЕ ДОЛЖНОСТЬ:
                             </label>
-                            <select class="form-select" id="position" required>
+                            <select class="form-select" id="position" required onchange="showRoleQuestions()">
                                 <option value="">-- ВЫБЕРИТЕ РОЛЬ --</option>
                                 <option value="АДМИНИСТРАТОР">👑 АДМИНИСТРАТОР</option>
                                 <option value="МОДЕРАТОР">🛡️ МОДЕРАТОР</option>
@@ -659,12 +685,12 @@
                         <div class="form-group">
                             <label class="form-label">
                                 <span class="form-icon">🎂</span>
-                                СКОЛЬКО ВАМ ЛЕТ? (12-18):
+                                СКОЛЬКО ВАМ ЛЕТ? (ОТ 13):
                             </label>
-                            <input type="number" class="form-input" id="age" min="12" max="18" required 
+                            <input type="number" class="form-input" id="age" min="13" required 
                                    oninput="validateAge(this)">
                             <div style="margin-top: 8px; font-size: 0.9rem; color: #9370db;">
-                                Только для участников от 12 до 18 лет включительно
+                                Минимальный возраст: 13 лет
                             </div>
                         </div>
 
@@ -686,142 +712,56 @@
                                    placeholder="@username или t.me/username">
                         </div>
 
-                        <!-- Кнопка для дополнительных вопросов -->
-                        <button type="button" class="toggle-questions-btn" onclick="toggleQuestions()">
-                            📋 ПОКАЗАТЬ ДОПОЛНИТЕЛЬНЫЕ ВОПРОСЫ
-                        </button>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="form-icon">⏰</span>
+                                СКОЛЬКО ВРЕМЕНИ МОЖЕТЕ УДЕЛЯТЬ?
+                            </label>
+                            <select class="form-select" id="time" required>
+                                <option value="">-- ВЫБЕРИТЕ --</option>
+                                <option value="1-2 часа в день">1-2 часа в день</option>
+                                <option value="3-4 часа в день">3-4 часа в день</option>
+                                <option value="5+ часов в день">5+ часов в день</option>
+                                <option value="Только по выходным">Только по выходным</option>
+                            </select>
+                        </div>
 
-                        <!-- Скрытые вопросы -->
-                        <div id="hiddenQuestions" class="hidden-questions">
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">⏰</span>
-                                    СКОЛЬКО ВРЕМЕНИ МОЖЕТЕ УДЕЛЯТЬ?
-                                </label>
-                                <select class="form-select" id="time">
-                                    <option value="">-- ВЫБЕРИТЕ --</option>
-                                    <option value="1-2 часа в день">1-2 часа в день</option>
-                                    <option value="3-4 часа в день">3-4 часа в день</option>
-                                    <option value="5+ часов в день">5+ часов в день</option>
-                                    <option value="Только по выходным">Только по выходным</option>
-                                </select>
-                            </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="form-icon">💼</span>
+                                ОПЫТ РАБОТЫ НА ПОХОЖИХ ДОЛЖНОСТЯХ:
+                                <span class="optional">(не обязательно)</span>
+                            </label>
+                            <textarea class="form-textarea" id="experience" 
+                                      placeholder="Где и кем работали ранее? Какой был опыт? (не обязательно)"></textarea>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">💼</span>
-                                    ОПЫТ РАБОТЫ НА ПОХОЖИХ ДОЛЖНОСТЯХ:
-                                </label>
-                                <textarea class="form-textarea" id="experience" rows="3" 
-                                          placeholder="Где и кем работали ранее? Какой был опыт?"></textarea>
-                            </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="form-icon">❓</span>
+                                ПОЧЕМУ ИМЕННО МЫ? ЧЕМ ПОНРАВИЛСЯ ПРОЕКТ?
+                            </label>
+                            <textarea class="form-textarea" id="whyUs" required 
+                                      placeholder="Почему выбрали именно наш проект? Что вам в нем нравится?"></textarea>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">❓</span>
-                                    ПОЧЕМУ ИМЕННО МЫ? ЧЕМ ПОНРАВИЛСЯ ПРОЕКТ?
-                                </label>
-                                <textarea class="form-textarea" id="whyUs" rows="3" 
-                                          placeholder="Почему выбрали именно наш проект? Что вам в нем нравится?"></textarea>
-                            </div>
+                        <!-- Вопросы для ролей -->
+                        <div id="roleQuestions"></div>
 
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">📜</span>
-                                    ЗНАНИЕ ПРАВИЛ ПРОЕКТА:
-                                </label>
-                                <textarea class="form-textarea" id="rulesKnowledge" rows="3" 
-                                          placeholder="Знакомы ли с правилами? Какие основные правила знаете?"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">🚫</span>
-                                    СИТУАЦИЯ: ВИДИТЕ ЧИТЕРА. ВАШИ ДЕЙСТВИЯ?
-                                </label>
-                                <textarea class="form-textarea" id="cheaterScenario" rows="3" 
-                                          placeholder="Опишите шаг за шагом ваши действия при обнаружении читера"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">⚠️</span>
-                                    КОНФЛИКТ С ИГРОКОМ. КАК РЕШИТЕ?
-                                </label>
-                                <textarea class="form-textarea" id="conflictScenario" rows="3" 
-                                          placeholder="Игрок нарушает правила и грубит. Ваши действия?"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">💡</span>
-                                    ИДЕИ ДЛЯ УЛУЧШЕНИЯ ПРОЕКТА:
-                                </label>
-                                <textarea class="form-textarea" id="ideas" rows="3" 
-                                          placeholder="Какие улучшения вы бы предложили для проекта?"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">⚔️</span>
-                                    ВАШИ СИЛЬНЫЕ СТОРОНЫ:
-                                </label>
-                                <textarea class="form-textarea" id="strengths" rows="3" 
-                                          placeholder="В чем вы особенно хороши? Какие навыки выделяют вас?"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">🎭</span>
-                                    СЛАБЫЕ СТОРОНЫ:
-                                </label>
-                                <textarea class="form-textarea" id="weaknesses" rows="3" 
-                                          placeholder="Над чем вам нужно работать? Какие трудности испытываете?"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">🤝</span>
-                                    РАБОТА В КОМАНДЕ:
-                                </label>
-                                <textarea class="form-textarea" id="teamwork" rows="3" 
-                                          placeholder="Как вы работаете в команде? Легко ли находите общий язык?"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">🏗️</span>
-                                    ЕСЛИ БИЛДЕР: ПРИМЕРЫ РАБОТ (ССЫЛКИ):
-                                </label>
-                                <textarea class="form-textarea" id="builderPortfolio" rows="3" 
-                                          placeholder="Ссылки на скриншоты или видео ваших построек"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">🔧</span>
-                                    ЕСЛИ ТЕСТЕР: КАК ИЩЕТЕ БАГИ?
-                                </label>
-                                <textarea class="form-textarea" id="testerMethod" rows="3" 
-                                          placeholder="Опишите ваш метод поиска и тестирования багов"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">⚡</span>
-                                    ЕСЛИ СКРИПТЕР: ЯЗЫКИ И НАВЫКИ:
-                                </label>
-                                <textarea class="form-textarea" id="scripterSkills" rows="3" 
-                                          placeholder="Какие языки программирования знаете? Примеры работ?"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">🎯</span>
-                                    ЦЕЛИ В ПРОЕКТЕ:
-                                </label>
-                                <textarea class="form-textarea" id="goals" rows="3" 
-                                          placeholder="Чего хотите достичь в нашем проекте?"></textarea>
+                        <!-- ID заявки -->
+                        <div class="form-group" id="applicationIdContainer" style="display: none;">
+                            <label class="form-label">
+                                <span class="form-icon">🆔</span>
+                                ID ВАШЕЙ ЗАЯВКИ:
+                            </label>
+                            <div class="id-display" id="applicationIdDisplay"></div>
+                            <div style="text-align: center; margin-top: 10px;">
+                                <button type="button" class="copy-btn" onclick="copyApplicationId()">
+                                    📋 КОПИРОВАТЬ ID
+                                </button>
+                                <div style="margin-top: 10px; color: #9370db; font-size: 0.9rem;">
+                                    Сохраните этот ID для проверки статуса заявки
+                                </div>
                             </div>
                         </div>
 
@@ -836,20 +776,46 @@
                 <div class="positions-grid">
                     <div class="position-item">
                         <h3 class="neon-purple">👑 АДМИНИСТРАТОР</h3>
-                        <p>Полный контроль над проектом, управление командой, стратегическое планирование и развитие LaimeWorld.</p>
+                        <p>Управление проектом, руководство командой, стратегическое развитие LaimeWorld.</p>
                     </div>
                     <div class="position-item">
                         <h3 class="neon-purple">🛡️ МОДЕРАТОР</h3>
-                        <p>Контроль за соблюдением правил, помощь игрокам, решение конфликтов, поддержание порядка в LaimeWorld.</p>
+                        <p>Контроль за соблюдением правил, помощь игрокам, решение конфликтов.</p>
                     </div>
                     <div class="position-item">
                         <h3 class="neon-purple">🏗️ БИЛДЕР</h3>
-                        <p>Создание построек, дизайн карт, работа с ландшафтом, строительство структур для LaimeWorld.</p>
+                        <p>Создание построек, дизайн карт, работа с ландшафтом.</p>
                     </div>
                     <div class="position-item">
                         <h3 class="neon-purple">🔧 ТЕСТЕР</h3>
-                        <p>Поиск багов, тестирование обновлений, проверка стабильности, составление отчетов для LaimeWorld.</p>
+                        <p>Поиск багов, тестирование обновлений, проверка стабильности.</p>
                     </div>
+                </div>
+            </div>
+
+            <!-- Страница проверки статуса -->
+            <div id="checkPage" class="page">
+                <div class="check-status-card">
+                    <h2 class="form-title">🔍 ПРОВЕРКА СТАТУСА ЗАЯВКИ</h2>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            <span class="form-icon">🆔</span>
+                            ВВЕДИТЕ ID ЗАЯВКИ:
+                        </label>
+                        <input type="text" class="form-input" id="checkId" 
+                               placeholder="Введите ID заявки (например: LW123456)">
+                        <div style="margin-top: 10px; color: #9370db; font-size: 0.9rem;">
+                            ID был выдан при отправке заявки
+                        </div>
+                    </div>
+                    
+                    <button class="btn" onclick="checkStatus()">
+                        <span class="form-icon">🔍</span>
+                        ПРОВЕРИТЬ СТАТУС
+                    </button>
+                    
+                    <div id="statusResult"></div>
                 </div>
             </div>
 
@@ -903,12 +869,18 @@
             </div>
         </div>
 
+        <!-- Нотификация -->
+        <div id="notification" class="notification">
+            <div class="notification-title"></div>
+            <div class="notification-message"></div>
+        </div>
+
         <!-- Футер -->
         <footer>
             <div class="container">
                 <p class="neon-purple">LAIMEWORLD © 2024 | СИСТЕМА ЗАЯВОК</p>
                 <p style="color: #9370db; margin-top: 15px; font-size: 0.9rem;">
-                    Для участников 12-18 лет | Все данные хранятся локально
+                    Минимальный возраст: 13 лет | Все данные хранятся локально
                 </p>
             </div>
         </footer>
@@ -917,19 +889,27 @@
     <script>
         // Конфигурация
         const STORAGE_KEY = 'laimeworld_applications';
-        const ADMIN_PASSWORD = 'LAIME2024'; // Измените этот код на свой!
+        const ADMIN_PASSWORD = 'Wizixc1LW'; // Пароль для админ панели
+
+        // Генерация ID для заявки
+        function generateApplicationId() {
+            const prefix = 'LW';
+            const timestamp = Date.now().toString().slice(-6);
+            const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+            return `${prefix}${timestamp}${random}`;
+        }
 
         // Валидация возраста
         function validateAge(input) {
             const age = parseInt(input.value);
             const ageWarning = document.querySelector('.age-warning .neon-cyan');
             
-            if (age < 12 || age > 18) {
+            if (age < 13) {
                 input.style.borderColor = '#ff4444';
                 input.style.boxShadow = '0 0 10px rgba(255, 68, 68, 0.5)';
                 if (ageWarning) {
                     ageWarning.style.color = '#ff4444';
-                    ageWarning.textContent = '⚠ ВОЗРАСТ ДОЛЖЕН БЫТЬ 12-18!';
+                    ageWarning.textContent = '⚠ МИНИМАЛЬНЫЙ ВОЗРАСТ 13 ЛЕТ!';
                 }
             } else {
                 input.style.borderColor = '#00ced1';
@@ -939,6 +919,156 @@
                     ageWarning.textContent = '✅ ВОЗРАСТ ПОДХОДИТ';
                 }
             }
+        }
+
+        // Показать вопросы для конкретной роли
+        function showRoleQuestions() {
+            const position = document.getElementById('position').value;
+            const roleQuestions = document.getElementById('roleQuestions');
+            
+            let questionsHTML = '';
+            
+            switch(position) {
+                case 'БИЛДЕР':
+                    questionsHTML = `
+                        <div class="role-specific-questions show">
+                            <h3 style="color: #9370db; margin-bottom: 15px; text-align: center;">🏗️ ВОПРОСЫ ДЛЯ БИЛДЕРА</h3>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="form-icon">🏰</span>
+                                    ПРИМЕРЫ ВАШИХ РАБОТ:
+                                    <span class="optional">(не обязательно)</span>
+                                </label>
+                                <textarea class="form-textarea" id="builderPortfolio" 
+                                          placeholder="Ссылки на скриншоты или видео ваших построек (не обязательно)"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="form-icon">🎨</span>
+                                    КАКОЙ СТИЛЬ ПОСТРОЕК ПРЕДПОЧИТАЕТЕ?
+                                </label>
+                                <textarea class="form-textarea" id="builderStyle" required 
+                                          placeholder="Опишите ваш стиль построек, любимые техники"></textarea>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'СКРИПТЕР':
+                    questionsHTML = `
+                        <div class="role-specific-questions show">
+                            <h3 style="color: #9370db; margin-bottom: 15px; text-align: center;">⚡ ВОПРОСЫ ДЛЯ СКРИПТЕРА</h3>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="form-icon">💻</span>
+                                    ЯЗЫКИ ПРОГРАММИРОВАНИЯ КОТОРЫЕ ЗНАЕТЕ:
+                                </label>
+                                <textarea class="form-textarea" id="scripterSkills" required 
+                                          placeholder="Какие языки программирования знаете?"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="form-icon">📁</span>
+                                    ПРИМЕРЫ ВАШИХ РАБОТ:
+                                    <span class="optional">(не обязательно)</span>
+                                </label>
+                                <textarea class="form-textarea" id="scripterPortfolio" 
+                                          placeholder="Ссылки на ваши проекты или код (не обязательно)"></textarea>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'ТЕСТЕР':
+                    questionsHTML = `
+                        <div class="role-specific-questions show">
+                            <h3 style="color: #9370db; margin-bottom: 15px; text-align: center;">🔧 ВОПРОСЫ ДЛЯ ТЕСТЕРА</h3>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="form-icon">🔍</span>
+                                    КАК ВЫ ИЩЕТЕ БАГИ И ОШИБКИ?
+                                </label>
+                                <textarea class="form-textarea" id="testerMethod" required 
+                                          placeholder="Опишите ваш метод поиска багов"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="form-icon">📋</span>
+                                    КАК СОСТАВЛЯЕТЕ ОТЧЕТЫ О БАГАХ?
+                                    <span class="optional">(не обязательно)</span>
+                                </label>
+                                <textarea class="form-textarea" id="testerReports" 
+                                          placeholder="Как вы оформляете отчеты о найденных багах? (не обязательно)"></textarea>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'МОДЕРАТОР':
+                    questionsHTML = `
+                        <div class="role-specific-questions show">
+                            <h3 style="color: #9370db; margin-bottom: 15px; text-align: center;">🛡️ ВОПРОСЫ ДЛЯ МОДЕРАТОРА</h3>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="form-icon">⚖️</span>
+                                    СИТУАЦИЯ: ИГРОК НАРУШАЕТ ПРАВИЛА. ВАШИ ДЕЙСТВИЯ?
+                                </label>
+                                <textarea class="form-textarea" id="moderatorScenario" required 
+                                          placeholder="Опишите шаг за шагом ваши действия"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="form-icon">🤝</span>
+                                    КАК РЕШАЕТЕ КОНФЛИКТЫ МЕЖДУ ИГРОКАМИ?
+                                </label>
+                                <textarea class="form-textarea" id="conflictResolution" required 
+                                          placeholder="Опишите ваш подход к решению конфликтов"></textarea>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'АДМИНИСТРАТОР':
+                    questionsHTML = `
+                        <div class="role-specific-questions show">
+                            <h3 style="color: #9370db; margin-bottom: 15px; text-align: center;">👑 ВОПРОСЫ ДЛЯ АДМИНИСТРАТОРА</h3>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="form-icon">🎯</span>
+                                    КАКИЕ У ВАС ИДЕИ ДЛЯ РАЗВИТИЯ ПРОЕКТА?
+                                    <span class="optional">(не обязательно)</span>
+                                </label>
+                                <textarea class="form-textarea" id="adminIdeas" 
+                                          placeholder="Какие улучшения предлагаете для проекта? (не обязательно)"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="form-icon">👥</span>
+                                    ОПЫТ УПРАВЛЕНИЯ КОМАНДОЙ:
+                                </label>
+                                <textarea class="form-textarea" id="managementExperience" required 
+                                          placeholder="Был ли у вас опыт управления командой?"></textarea>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                default:
+                    roleQuestions.innerHTML = '';
+                    return;
+            }
+            
+            roleQuestions.innerHTML = questionsHTML;
         }
 
         // Показать/скрыть страницы
@@ -958,23 +1088,6 @@
             
             if (pageId === 'admin') {
                 loadApplications();
-            }
-        }
-
-        // Показать/скрыть дополнительные вопросы
-        let questionsVisible = false;
-        function toggleQuestions() {
-            const questionsDiv = document.getElementById('hiddenQuestions');
-            const toggleBtn = document.querySelector('.toggle-questions-btn');
-            
-            questionsVisible = !questionsVisible;
-            
-            if (questionsVisible) {
-                questionsDiv.classList.add('show');
-                toggleBtn.innerHTML = '📋 СКРЫТЬ ДОПОЛНИТЕЛЬНЫЕ ВОПРОСЫ';
-            } else {
-                questionsDiv.classList.remove('show');
-                toggleBtn.innerHTML = '📋 ПОКАЗАТЬ ДОПОЛНИТЕЛЬНЫЕ ВОПРОСЫ';
             }
         }
 
@@ -1006,6 +1119,7 @@
                 }, 1000);
                 input.value = '';
                 input.focus();
+                showNotification('Ошибка', '❌ Неверный код доступа!');
             }
         }
 
@@ -1015,60 +1129,180 @@
             
             // Проверка возраста
             const age = parseInt(document.getElementById('age').value);
-            if (age < 12 || age > 18) {
-                alert('❌ Возраст должен быть от 12 до 18 лет!');
+            if (age < 13) {
+                showNotification('Ошибка', '❌ Минимальный возраст 13 лет!');
                 return;
             }
 
-            // Сбор данных
-            const application = {
-                id: Date.now(),
+            // Генерация ID
+            const appId = generateApplicationId();
+            
+            // Сбор данных в зависимости от роли
+            const position = document.getElementById('position').value;
+            let application = {
+                id: appId,
                 date: new Date().toLocaleString('ru-RU'),
-                position: document.getElementById('position').value,
+                position: position,
                 age: age,
                 nickname: document.getElementById('nickname').value.trim(),
                 telegram: document.getElementById('telegram').value.trim(),
                 time: document.getElementById('time').value,
-                experience: document.getElementById('experience').value.trim(),
+                experience: document.getElementById('experience').value.trim() || 'Не указано',
                 whyUs: document.getElementById('whyUs').value.trim(),
-                rulesKnowledge: document.getElementById('rulesKnowledge').value.trim(),
-                cheaterScenario: document.getElementById('cheaterScenario').value.trim(),
-                conflictScenario: document.getElementById('conflictScenario').value.trim(),
-                ideas: document.getElementById('ideas').value.trim(),
-                strengths: document.getElementById('strengths').value.trim(),
-                weaknesses: document.getElementById('weaknesses').value.trim(),
-                teamwork: document.getElementById('teamwork').value.trim(),
-                builderPortfolio: document.getElementById('builderPortfolio').value.trim(),
-                testerMethod: document.getElementById('testerMethod').value.trim(),
-                scripterSkills: document.getElementById('scripterSkills').value.trim(),
-                goals: document.getElementById('goals').value.trim(),
-                status: 'pending' // Статус по умолчанию: на рассмотрении
+                status: 'pending'
             };
+
+            // Добавляем данные в зависимости от роли
+            switch(position) {
+                case 'БИЛДЕР':
+                    application.builderPortfolio = document.getElementById('builderPortfolio')?.value.trim() || 'Не указано';
+                    application.builderStyle = document.getElementById('builderStyle')?.value.trim() || 'Не указано';
+                    break;
+                case 'СКРИПТЕР':
+                    application.scripterSkills = document.getElementById('scripterSkills')?.value.trim() || 'Не указано';
+                    application.scripterPortfolio = document.getElementById('scripterPortfolio')?.value.trim() || 'Не указано';
+                    break;
+                case 'ТЕСТЕР':
+                    application.testerMethod = document.getElementById('testerMethod')?.value.trim() || 'Не указано';
+                    application.testerReports = document.getElementById('testerReports')?.value.trim() || 'Не указано';
+                    break;
+                case 'МОДЕРАТОР':
+                    application.moderatorScenario = document.getElementById('moderatorScenario')?.value.trim() || 'Не указано';
+                    application.conflictResolution = document.getElementById('conflictResolution')?.value.trim() || 'Не указано';
+                    break;
+                case 'АДМИНИСТРАТОР':
+                    application.adminIdeas = document.getElementById('adminIdeas')?.value.trim() || 'Не указано';
+                    application.managementExperience = document.getElementById('managementExperience')?.value.trim() || 'Не указано';
+                    break;
+            }
 
             // Сохранение в localStorage
             const applications = getApplications();
             applications.push(application);
             localStorage.setItem(STORAGE_KEY, JSON.stringify(applications));
 
-            // Очистка формы
-            document.getElementById('applicationForm').reset();
-            const hiddenQuestions = document.getElementById('hiddenQuestions');
-            if (hiddenQuestions.classList.contains('show')) {
-                toggleQuestions();
-            }
-
-            // Показать уведомление
-            alert('✅ Заявка успешно отправлена!');
+            // Показать ID заявки
+            document.getElementById('applicationIdContainer').style.display = 'block';
+            document.getElementById('applicationIdDisplay').textContent = appId;
             
-            // Сброс возраста
-            document.getElementById('age').style.borderColor = '#6a0dad';
-            document.getElementById('age').style.boxShadow = 'none';
-            const ageWarning = document.querySelector('.age-warning .neon-cyan');
-            if (ageWarning) {
-                ageWarning.style.color = '#00ced1';
-                ageWarning.textContent = '⚠ ВОЗРАСТ ОТ 12 ДО 18 ЛЕТ';
-            }
+            // Прокрутить к ID
+            document.getElementById('applicationIdContainer').scrollIntoView({ behavior: 'smooth' });
+
+            showNotification('Успех', `✅ Заявка отправлена! Ваш ID: ${appId}`);
         });
+
+        // Копировать ID заявки
+        function copyApplicationId() {
+            const id = document.getElementById('applicationIdDisplay').textContent;
+            navigator.clipboard.writeText(id).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '✅ СКОПИРОВАНО';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 КОПИРОВАТЬ ID';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // Проверить статус заявки
+        function checkStatus() {
+            const checkId = document.getElementById('checkId').value.trim().toUpperCase();
+            const statusResult = document.getElementById('statusResult');
+            
+            if (!checkId) {
+                statusResult.innerHTML = `
+                    <div class="result-card" style="border-color: #ff4444;">
+                        <div style="color: #ff4444; text-align: center; font-size: 1.1rem;">
+                            ❌ Введите ID заявки
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            const applications = getApplications();
+            const application = applications.find(app => app.id === checkId);
+            
+            if (!application) {
+                statusResult.innerHTML = `
+                    <div class="result-card" style="border-color: #ff4444;">
+                        <div style="color: #ff4444; text-align: center; font-size: 1.1rem;">
+                            ❌ Заявка с ID "${checkId}" не найдена
+                        </div>
+                        <div style="text-align: center; margin-top: 10px; color: #9370db;">
+                            Проверьте правильность введенного ID
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            let statusClass, statusText, statusIcon;
+            
+            switch(application.status) {
+                case 'pending':
+                    statusClass = 'result-pending';
+                    statusText = 'НА РАССМОТРЕНИИ';
+                    statusIcon = '🟡';
+                    break;
+                case 'approved':
+                    statusClass = 'result-approved';
+                    statusText = 'ОДОБРЕНО';
+                    statusIcon = '🟢';
+                    break;
+                case 'rejected':
+                    statusClass = 'result-rejected';
+                    statusText = 'ОТКЛОНЕНО';
+                    statusIcon = '🔴';
+                    break;
+            }
+            
+            statusResult.innerHTML = `
+                <div class="result-card ${statusClass}">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">${statusIcon}</div>
+                        <div style="font-size: 1.5rem; color: ${application.status === 'approved' ? '#00ff00' : application.status === 'rejected' ? '#ff5555' : '#ffa500'}; font-weight: 700;">
+                            ${statusText}
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <div style="color: #9370db; font-weight: 600;">ID заявки:</div>
+                        <div style="color: #00ced1; font-size: 1.2rem; font-weight: 700;">${application.id}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <div style="color: #9370db; font-weight: 600;">Должность:</div>
+                        <div style="color: #e0e0ff;">${application.position}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <div style="color: #9370db; font-weight: 600;">Никнейм:</div>
+                        <div style="color: #e0e0ff;">${application.nickname}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <div style="color: #9370db; font-weight: 600;">Дата подачи:</div>
+                        <div style="color: #e0e0ff;">${application.date}</div>
+                    </div>
+                    
+                    ${application.status === 'approved' ? `
+                        <div style="margin-top: 20px; padding: 15px; background: rgba(0, 255, 0, 0.1); border-radius: 8px; text-align: center;">
+                            <div style="color: #00ff00; font-weight: 700; margin-bottom: 5px;">🎉 ПОЗДРАВЛЯЕМ!</div>
+                            <div style="color: #e0e0ff;">С вами свяжется администратор в Telegram</div>
+                        </div>
+                    ` : ''}
+                    
+                    ${application.status === 'rejected' ? `
+                        <div style="margin-top: 20px; padding: 15px; background: rgba(255, 0, 0, 0.1); border-radius: 8px; text-align: center;">
+                            <div style="color: #ff5555; font-weight: 700; margin-bottom: 5px;">😔 ЗАЯВКА ОТКЛОНЕНА</div>
+                            <div style="color: #e0e0ff;">Попробуйте подать заявку снова через некоторое время</div>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
 
         // Получить все заявки
         function getApplications() {
@@ -1096,7 +1330,7 @@
             }
             
             // Сортировка: сначала новые
-            applications.sort((a, b) => b.id - a.id);
+            applications.sort((a, b) => new Date(b.date) - new Date(a.date));
             
             // Отображение заявок
             applicationsList.innerHTML = applications.map(app => `
@@ -1104,10 +1338,11 @@
                     <div class="application-header">
                         <div class="application-info">
                             <div class="application-position">${app.position}</div>
-                            <div class="application-user">${app.nickname} | ${app.telegram}</div>
-                            <div class="application-age">${app.age} лет | ${app.time || 'Не указано'}</div>
+                            <div class="application-user">
+                                👤 ${app.nickname} | 📱 ${app.telegram} | 🎂 ${app.age} лет
+                            </div>
                             <div style="font-size: 0.9rem; color: #888; margin-top: 5px;">
-                                ${app.date}
+                                🆔 ${app.id} | 📅 ${app.date}
                             </div>
                         </div>
                         <div class="application-status status-${app.status}">
@@ -1116,39 +1351,38 @@
                     </div>
                     
                     <div class="application-details">
-                        <div class="detail-item">
-                            <div class="detail-label">Опыт работы:</div>
-                            <div class="detail-value">${app.experience || 'Не указано'}</div>
+                        <div style="margin-bottom: 10px;">
+                            <div style="color: #9370db; font-weight: 600;">⏰ Время:</div>
+                            <div style="color: #e0e0ff;">${app.time}</div>
                         </div>
-                        <div class="detail-item">
-                            <div class="detail-label">Почему выбрал нас:</div>
-                            <div class="detail-value">${app.whyUs || 'Не указано'}</div>
+                        <div style="margin-bottom: 10px;">
+                            <div style="color: #9370db; font-weight: 600;">❓ Почему выбрал нас:</div>
+                            <div style="color: #e0e0ff;">${app.whyUs}</div>
                         </div>
-                        <div class="detail-item">
-                            <div class="detail-label">Знание правил:</div>
-                            <div class="detail-value">${app.rulesKnowledge || 'Не указано'}</div>
-                        </div>
-                        ${app.ideas ? `
-                        <div class="detail-item">
-                            <div class="detail-label">Идеи для улучшения:</div>
-                            <div class="detail-value">${app.ideas}</div>
+                        ${app.experience !== 'Не указано' ? `
+                        <div style="margin-bottom: 10px;">
+                            <div style="color: #9370db; font-weight: 600;">💼 Опыт:</div>
+                            <div style="color: #e0e0ff;">${app.experience}</div>
                         </div>
                         ` : ''}
                     </div>
                     
                     <div class="admin-controls">
                         ${app.status === 'pending' ? `
-                            <button class="btn btn-sm btn-approve" onclick="changeStatus(${app.id}, 'approved')">
+                            <button class="btn btn-sm btn-approve" onclick="changeStatus('${app.id}', 'approved')">
                                 ✅ ОДОБРИТЬ
                             </button>
-                            <button class="btn btn-sm btn-reject" onclick="changeStatus(${app.id}, 'rejected')">
+                            <button class="btn btn-sm btn-reject" onclick="changeStatus('${app.id}', 'rejected')">
                                 ❌ ОТКЛОНИТЬ
                             </button>
                         ` : ''}
-                        <button class="btn btn-sm btn-view" onclick="viewApplication(${app.id})">
+                        <button class="btn btn-sm btn-contact" onclick="contactUser('${app.id}')">
+                            💬 НАПИСАТЬ В ТГ
+                        </button>
+                        <button class="btn btn-sm btn-view" onclick="viewApplication('${app.id}')">
                             👁️ ПРОСМОТР
                         </button>
-                        <button class="btn btn-sm btn-delete" onclick="deleteApplication(${app.id})">
+                        <button class="btn btn-sm btn-delete" onclick="deleteApplication('${app.id}')">
                             🗑️ УДАЛИТЬ
                         </button>
                     </div>
@@ -1180,8 +1414,27 @@
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(applications));
                 loadApplications();
                 
-                alert(`✅ Заявка ${newStatus === 'approved' ? 'одобрена' : 'отклонена'}!`);
+                showNotification('Успех', `✅ Заявка ${newStatus === 'approved' ? 'одобрена' : 'отклонена'}!`);
             }
+        }
+
+        // Связаться с пользователем в Telegram
+        function contactUser(appId) {
+            const applications = getApplications();
+            const application = applications.find(app => app.id === appId);
+            
+            if (!application) return;
+            
+            // Очищаем telegram от @ и t.me/
+            let telegram = application.telegram.trim();
+            telegram = telegram.replace('@', '');
+            telegram = telegram.replace('t.me/', '');
+            telegram = telegram.replace('https://t.me/', '');
+            
+            // Открываем ссылку в новом окне
+            window.open(`https://t.me/${telegram}`, '_blank');
+            
+            showNotification('Telegram', `💬 Открывается чат с ${application.nickname}`);
         }
 
         // Просмотр полной заявки
@@ -1191,20 +1444,85 @@
             
             if (!app) return;
             
-            const details = `
-                <div style="max-height: 70vh; overflow-y: auto; padding-right: 10px;">
-                    <h3 style="color: #9370db; margin-bottom: 20px; text-align: center;">
-                        ПОЛНАЯ ИНФОРМАЦИЯ О ЗАЯВКЕ
-                    </h3>
+            let roleSpecificHTML = '';
+            
+            switch(app.position) {
+                case 'БИЛДЕР':
+                    roleSpecificHTML = `
+                        <div style="margin-bottom: 15px;">
+                            <div style="color: #9370db; font-weight: 600;">🏰 Примеры работ:</div>
+                            <div style="color: #e0e0ff;">${app.builderPortfolio || 'Не указано'}</div>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <div style="color: #9370db; font-weight: 600;">🎨 Стиль построек:</div>
+                            <div style="color: #e0e0ff;">${app.builderStyle || 'Не указано'}</div>
+                        </div>
+                    `;
+                    break;
+                case 'СКРИПТЕР':
+                    roleSpecificHTML = `
+                        <div style="margin-bottom: 15px;">
+                            <div style="color: #9370db; font-weight: 600;">💻 Навыки программирования:</div>
+                            <div style="color: #e0e0ff;">${app.scripterSkills || 'Не указано'}</div>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <div style="color: #9370db; font-weight: 600;">📁 Примеры работ:</div>
+                            <div style="color: #e0e0ff;">${app.scripterPortfolio || 'Не указано'}</div>
+                        </div>
+                    `;
+                    break;
+                case 'ТЕСТЕР':
+                    roleSpecificHTML = `
+                        <div style="margin-bottom: 15px;">
+                            <div style="color: #9370db; font-weight: 600;">🔍 Метод поиска багов:</div>
+                            <div style="color: #e0e0ff;">${app.testerMethod || 'Не указано'}</div>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <div style="color: #9370db; font-weight: 600;">📋 Отчеты о багах:</div>
+                            <div style="color: #e0e0ff;">${app.testerReports || 'Не указано'}</div>
+                        </div>
+                    `;
+                    break;
+                case 'МОДЕРАТОР':
+                    roleSpecificHTML = `
+                        <div style="margin-bottom: 15px;">
+                            <div style="color: #9370db; font-weight: 600;">⚖️ Действия при нарушении:</div>
+                            <div style="color: #e0e0ff;">${app.moderatorScenario || 'Не указано'}</div>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <div style="color: #9370db; font-weight: 600;">🤝 Решение конфликтов:</div>
+                            <div style="color: #e0e0ff;">${app.conflictResolution || 'Не указано'}</div>
+                        </div>
+                    `;
+                    break;
+                case 'АДМИНИСТРАТОР':
+                    roleSpecificHTML = `
+                        <div style="margin-bottom: 15px;">
+                            <div style="color: #9370db; font-weight: 600;">🎯 Идеи для проекта:</div>
+                            <div style="color: #e0e0ff;">${app.adminIdeas || 'Не указано'}</div>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <div style="color: #9370db; font-weight: 600;">👥 Опыт управления:</div>
+                            <div style="color: #e0e0ff;">${app.managementExperience || 'Не указано'}</div>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            const modal = document.createElement('div');
+            modal.className = 'modal active';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto;">
+                    <h3 class="modal-title">👁️ ПРОСМОТР ЗАЯВКИ #${app.id}</h3>
                     
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
                         <div>
-                            <div class="detail-label">Должность:</div>
-                            <div class="detail-value">${app.position}</div>
+                            <div style="color: #9370db; font-weight: 600;">Должность:</div>
+                            <div style="color: #e0e0ff; font-size: 1.1rem;">${app.position}</div>
                         </div>
                         <div>
-                            <div class="detail-label">Статус:</div>
-                            <div class="detail-value" style="color: ${app.status === 'approved' ? '#00ff00' : app.status === 'rejected' ? '#ff5555' : '#ffa500'}">
+                            <div style="color: #9370db; font-weight: 600;">Статус:</div>
+                            <div style="color: ${app.status === 'approved' ? '#00ff00' : app.status === 'rejected' ? '#ff5555' : '#ffa500'}; font-weight: 700;">
                                 ${getStatusText(app.status)}
                             </div>
                         </div>
@@ -1212,102 +1530,51 @@
                     
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
                         <div>
-                            <div class="detail-label">Никнейм:</div>
-                            <div class="detail-value">${app.nickname}</div>
+                            <div style="color: #9370db; font-weight: 600;">Никнейм:</div>
+                            <div style="color: #e0e0ff;">${app.nickname}</div>
                         </div>
                         <div>
-                            <div class="detail-label">Telegram:</div>
-                            <div class="detail-value">${app.telegram}</div>
+                            <div style="color: #9370db; font-weight: 600;">Telegram:</div>
+                            <div style="color: #00ced1;">${app.telegram}</div>
                         </div>
                     </div>
                     
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
                         <div>
-                            <div class="detail-label">Возраст:</div>
-                            <div class="detail-value">${app.age} лет</div>
+                            <div style="color: #9370db; font-weight: 600;">Возраст:</div>
+                            <div style="color: #e0e0ff;">${app.age} лет</div>
                         </div>
                         <div>
-                            <div class="detail-label">Время в день:</div>
-                            <div class="detail-value">${app.time || 'Не указано'}</div>
+                            <div style="color: #9370db; font-weight: 600;">Время в день:</div>
+                            <div style="color: #e0e0ff;">${app.time}</div>
                         </div>
                     </div>
                     
                     <div style="margin-bottom: 20px;">
-                        <div class="detail-label">Опыт работы:</div>
-                        <div class="detail-value" style="background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
-                            ${app.experience || 'Не указано'}
+                        <div style="color: #9370db; font-weight: 600;">💼 Опыт работы:</div>
+                        <div style="color: #e0e0ff; background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
+                            ${app.experience}
                         </div>
                     </div>
                     
                     <div style="margin-bottom: 20px;">
-                        <div class="detail-label">Почему выбрал нас:</div>
-                        <div class="detail-value" style="background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
-                            ${app.whyUs || 'Не указано'}
+                        <div style="color: #9370db; font-weight: 600;">❓ Почему выбрал нас:</div>
+                        <div style="color: #e0e0ff; background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
+                            ${app.whyUs}
                         </div>
                     </div>
                     
-                    ${app.cheaterScenario ? `
-                    <div style="margin-bottom: 20px;">
-                        <div class="detail-label">Действия при читере:</div>
-                        <div class="detail-value" style="background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
-                            ${app.cheaterScenario}
-                        </div>
-                    </div>
-                    ` : ''}
+                    ${roleSpecificHTML}
                     
-                    ${app.conflictScenario ? `
-                    <div style="margin-bottom: 20px;">
-                        <div class="detail-label">Решение конфликтов:</div>
-                        <div class="detail-value" style="background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
-                            ${app.conflictScenario}
-                        </div>
-                    </div>
-                    ` : ''}
-                    
-                    ${app.ideas ? `
-                    <div style="margin-bottom: 20px;">
-                        <div class="detail-label">Идеи для улучшения:</div>
-                        <div class="detail-value" style="background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
-                            ${app.ideas}
-                        </div>
-                    </div>
-                    ` : ''}
-                    
-                    ${app.strengths ? `
-                    <div style="margin-bottom: 20px;">
-                        <div class="detail-label">Сильные стороны:</div>
-                        <div class="detail-value" style="background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
-                            ${app.strengths}
-                        </div>
-                    </div>
-                    ` : ''}
-                    
-                    ${app.builderPortfolio ? `
-                    <div style="margin-bottom: 20px;">
-                        <div class="detail-label">Примеры работ (билдер):</div>
-                        <div class="detail-value" style="background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
-                            ${app.builderPortfolio}
-                        </div>
-                    </div>
-                    ` : ''}
-                    
-                    ${app.scripterSkills ? `
-                    <div style="margin-bottom: 20px;">
-                        <div class="detail-label">Навыки (скриптер):</div>
-                        <div class="detail-value" style="background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
-                            ${app.scripterSkills}
-                        </div>
-                    </div>
-                    ` : ''}
-                    
-                    <div style="margin-bottom: 20px;">
-                        <div class="detail-label">Дата подачи:</div>
-                        <div class="detail-value">${app.date}</div>
+                    <div style="margin-top: 30px; display: flex; gap: 10px; justify-content: center;">
+                        <button class="btn btn-sm" onclick="this.closest('.modal').remove()">ЗАКРЫТЬ</button>
+                        <button class="btn btn-sm btn-contact" onclick="contactUser('${app.id}'); this.closest('.modal').remove()">
+                            💬 НАПИСАТЬ В ТГ
+                        </button>
                     </div>
                 </div>
             `;
-            
-            alertWithHTML(details, 'Просмотр заявки');
+            document.body.appendChild(modal);
         }
 
         // Удаление заявки
@@ -1321,7 +1588,7 @@
             localStorage.setItem(STORAGE_KEY, JSON.stringify(filteredApplications));
             loadApplications();
             
-            alert('✅ Заявка удалена!');
+            showNotification('Успех', '✅ Заявка удалена!');
         }
 
         // Обновление статистики
@@ -1337,26 +1604,33 @@
             document.getElementById('rejectedCount').textContent = rejected;
         }
 
-        // Вспомогательная функция для алерта с HTML
-        function alertWithHTML(content, title = '') {
-            const modal = document.createElement('div');
-            modal.className = 'modal active';
-            modal.innerHTML = `
-                <div class="modal-content" style="max-width: 700px;">
-                    ${title ? `<h3 class="modal-title">${title}</h3>` : ''}
-                    ${content}
-                    <div style="text-align: center; margin-top: 30px;">
-                        <button class="btn" onclick="this.closest('.modal').remove()">ЗАКРЫТЬ</button>
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(modal);
+        // Показать нотификацию
+        function showNotification(title, message) {
+            const notification = document.getElementById('notification');
+            const titleElement = notification.querySelector('.notification-title');
+            const messageElement = notification.querySelector('.notification-message');
+            
+            titleElement.textContent = title;
+            messageElement.textContent = message;
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
         }
 
         // Слушатель для клавиши Enter в поле пароля
         document.getElementById('adminPassword').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 checkPassword();
+            }
+        });
+
+        // Слушатель для клавиши Enter при проверке статуса
+        document.getElementById('checkId').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkStatus();
             }
         });
 
@@ -1368,6 +1642,7 @@
             
             // Скрываем админ-панель при загрузке
             document.getElementById('adminPage').classList.remove('active');
+            document.getElementById('checkPage').classList.remove('active');
         });
     </script>
 </body>
