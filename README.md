@@ -5,6 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LaimeWorld | Система заявок</title>
     <style>
+        /* Все стили остаются такими же, добавляем только небольшие правки */
+        
+        /* Добавим стили для пустого состояния */
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: #9370db;
+            background: rgba(30, 25, 45, 0.3);
+            border-radius: 10px;
+            border: 2px dashed #6a0dad;
+            margin: 20px 0;
+        }
+        
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .empty-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #9370db;
+        }
+        
+        .empty-text {
+            color: #b19cd9;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* Остальные стили остаются прежними */
         * {
             margin: 0;
             padding: 0;
@@ -981,7 +1014,7 @@
                     
                     <!-- Фильтры -->
                     <div class="filters">
-                        <button class="filter-btn active" onclick="filterApplications('all')">📋 ВСЕ</button>
+                        <button class="filter-btn active" onclick="filterApplications('all')">📋 ВСЕ ЗАЯВКИ</button>
                         <button class="filter-btn" onclick="filterApplications('pending')">🟡 НА РАССМОТРЕНИИ</button>
                         <button class="filter-btn" onclick="filterApplications('approved')">🟢 ОДОБРЕНО</button>
                         <button class="filter-btn" onclick="filterApplications('rejected')">🔴 ОТКЛОНЕНО</button>
@@ -1153,7 +1186,7 @@
             for (const fieldId of requiredFields) {
                 const field = document.getElementById(fieldId);
                 if (!field.value.trim()) {
-                    showNotification('Ошибка', `❌ Заполните поле: ${field.previousElementSibling.textContent}`, 'error');
+                    showNotification('Ошибка', `❌ Заполните все обязательные поля!`, 'error');
                     field.focus();
                     return;
                 }
@@ -1361,7 +1394,7 @@
             loadApplications();
         }
 
-        // Загрузка заявок в админ-панель
+        // Загрузка заявок в админ-панель (ИСПРАВЛЕННАЯ ВЕРСИЯ)
         function loadApplications() {
             let applications = getApplications();
             const applicationsList = document.getElementById('applicationsList');
@@ -1375,16 +1408,35 @@
             updateStatistics(getApplications());
             
             if (applications.length === 0) {
+                let emptyText, emptyIcon;
+                
+                switch(currentFilter) {
+                    case 'all':
+                        emptyText = 'Пока нет ни одной заявки';
+                        emptyIcon = '📭';
+                        break;
+                    case 'pending':
+                        emptyText = 'Нет заявок, ожидающих рассмотрения';
+                        emptyIcon = '🟡';
+                        break;
+                    case 'approved':
+                        emptyText = 'Нет одобренных заявок';
+                        emptyIcon = '🟢';
+                        break;
+                    case 'rejected':
+                        emptyText = 'Нет отклоненных заявок';
+                        emptyIcon = '🔴';
+                        break;
+                }
+                
                 applicationsList.innerHTML = `
-                    <div style="text-align: center; padding: 50px; color: #9370db;">
-                        <div style="font-size: 3rem; margin-bottom: 20px;">📭</div>
-                        <h3 style="margin-bottom: 10px;">
-                            ${currentFilter === 'all' ? 'НЕТ ЗАЯВОК' : 
-                              currentFilter === 'pending' ? 'НЕТ ЗАЯВОК НА РАССМОТРЕНИИ' :
-                              currentFilter === 'approved' ? 'НЕТ ОДОБРЕННЫХ ЗАЯВОК' :
-                              'НЕТ ОТКЛОНЕННЫХ ЗАЯВОК'}
-                        </h3>
-                        <p>${currentFilter === 'all' ? 'Пока никто не отправил заявку' : 'Нет заявок с таким статусом'}</p>
+                    <div class="empty-state">
+                        <div class="empty-icon">${emptyIcon}</div>
+                        <div class="empty-title">${emptyText}</div>
+                        ${currentFilter === 'all' ? 
+                            '<div class="empty-text">Как только пользователи начнут подавать заявки, они появятся здесь</div>' : 
+                            '<div class="empty-text">Измените фильтр, чтобы увидеть другие заявки</div>'
+                        }
                     </div>
                 `;
                 return;
@@ -1514,7 +1566,10 @@
             const applications = getApplications();
             const app = applications.find(app => app.id === appId);
             
-            if (!app) return;
+            if (!app) {
+                showNotification('Ошибка', 'Заявка не найдена!', 'error');
+                return;
+            }
             
             const modal = document.createElement('div');
             modal.className = 'modal active';
@@ -1670,7 +1725,7 @@
             document.body.appendChild(modal);
         }
 
-        // Удаление заявки (ИСПРАВЛЕНО)
+        // Удаление заявки
         function deleteApplication(appId) {
             if (!confirm('Вы уверены, что хотите удалить эту заявку? Это действие нельзя отменить.')) {
                 return;
@@ -1741,6 +1796,10 @@
             // Скрываем админ-панель при загрузке
             document.getElementById('adminPage').classList.remove('active');
             document.getElementById('checkPage').classList.remove('active');
+            
+            // Показываем количество заявок в консоли для отладки
+            console.log('Всего заявок:', applications.length);
+            console.log('Заявки:', applications);
         });
     </script>
 </body>
