@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Majestic DM | Система заявок</title>
+    <title>LaimeWorld | Система заявок</title>
     <style>
         * {
             margin: 0;
@@ -334,13 +334,36 @@
             border-bottom: 1px solid rgba(107, 13, 173, 0.3);
         }
 
+        .application-info {
+            flex: 1;
+        }
+
+        .application-position {
+            color: #9370db;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .application-user {
+            color: #b19cd9;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .application-age {
+            color: #00ced1;
+            font-size: 1rem;
+        }
+
         .application-status {
-            padding: 6px 18px;
+            padding: 8px 20px;
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-left: 15px;
         }
 
         .status-pending {
@@ -359,6 +382,38 @@
             background: rgba(255, 0, 0, 0.15);
             color: #ff5555;
             border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+
+        .application-details {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(30, 25, 45, 0.5);
+            border-radius: 8px;
+            border-left: 3px solid #9370db;
+        }
+
+        .detail-item {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(107, 13, 173, 0.2);
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .detail-label {
+            color: #9370db;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 3px;
+        }
+
+        .detail-value {
+            color: #e0e0ff;
+            font-size: 1rem;
+            line-height: 1.4;
         }
 
         .admin-controls {
@@ -406,6 +461,12 @@
 
         .modal.active {
             display: flex;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .modal-content {
@@ -416,6 +477,13 @@
             width: 90%;
             max-width: 450px;
             box-shadow: 0 0 60px rgba(138, 43, 226, 0.4);
+            transform: scale(1);
+            animation: modalScaleIn 0.3s ease;
+        }
+
+        @keyframes modalScaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .modal-title {
@@ -440,6 +508,12 @@
             border-radius: 10px;
             padding: 20px;
             text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
         }
 
         .stat-number {
@@ -521,6 +595,17 @@
             .form-title {
                 font-size: 1.7rem;
             }
+            
+            .application-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .application-status {
+                margin-left: 0;
+                align-self: flex-start;
+            }
         }
     </style>
 </head>
@@ -531,8 +616,8 @@
             <div class="container">
                 <div class="header-content">
                     <div class="logo">
-                        <div class="logo-icon">⚡</div>
-                        <h1 class="neon-text">MAJESTIC DM</h1>
+                        <div class="logo-icon">✨</div>
+                        <h1 class="neon-text">LAIMEWORLD</h1>
                     </div>
                     <nav>
                         <button class="nav-btn active" onclick="showPage('main')">📄 ПОДАТЬ ЗАЯВКУ</button>
@@ -546,7 +631,7 @@
         <main class="container">
             <div id="mainPage" class="page active">
                 <div class="form-card">
-                    <h2 class="form-title">ЗАЯВКА В КОМАНДУ</h2>
+                    <h2 class="form-title">ЗАЯВКА В КОМАНДУ LAIMEWORLD</h2>
                     
                     <!-- Возрастной барьер -->
                     <div class="age-warning">
@@ -589,7 +674,7 @@
                                 ВАШ НИКНЕЙМ:
                             </label>
                             <input type="text" class="form-input" id="nickname" required 
-                                   placeholder="Например: Dark_Majesty">
+                                   placeholder="Например: LaimePlayer">
                         </div>
 
                         <div class="form-group">
@@ -751,19 +836,19 @@
                 <div class="positions-grid">
                     <div class="position-item">
                         <h3 class="neon-purple">👑 АДМИНИСТРАТОР</h3>
-                        <p>Полный контроль над проектом, управление командой, стратегическое планирование и развитие.</p>
+                        <p>Полный контроль над проектом, управление командой, стратегическое планирование и развитие LaimeWorld.</p>
                     </div>
                     <div class="position-item">
                         <h3 class="neon-purple">🛡️ МОДЕРАТОР</h3>
-                        <p>Контроль за соблюдением правил, помощь игрокам, решение конфликтов, поддержание порядка.</p>
+                        <p>Контроль за соблюдением правил, помощь игрокам, решение конфликтов, поддержание порядка в LaimeWorld.</p>
                     </div>
                     <div class="position-item">
                         <h3 class="neon-purple">🏗️ БИЛДЕР</h3>
-                        <p>Создание построек, дизайн карт, работа с ландшафтом, строительство структур.</p>
+                        <p>Создание построек, дизайн карт, работа с ландшафтом, строительство структур для LaimeWorld.</p>
                     </div>
                     <div class="position-item">
                         <h3 class="neon-purple">🔧 ТЕСТЕР</h3>
-                        <p>Поиск багов, тестирование обновлений, проверка стабильности, составление отчетов.</p>
+                        <p>Поиск багов, тестирование обновлений, проверка стабильности, составление отчетов для LaimeWorld.</p>
                     </div>
                 </div>
             </div>
@@ -771,7 +856,7 @@
             <!-- Админ-панель -->
             <div id="adminPage" class="page">
                 <div class="admin-card">
-                    <h2 class="form-title">🔐 ПАНЕЛЬ УПРАВЛЕНИЯ</h2>
+                    <h2 class="form-title">🔐 ПАНЕЛЬ УПРАВЛЕНИЯ LAIMEWORLD</h2>
                     
                     <!-- Статистика -->
                     <div class="stats-grid">
@@ -784,12 +869,12 @@
                             <div class="neon-cyan">НА РАССМОТРЕНИИ</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-number" id="adminsCount">0</div>
-                            <div class="neon-cyan">АДМИНИСТРАТОРЫ</div>
+                            <div class="stat-number" id="approvedCount">0</div>
+                            <div class="neon-cyan">ОДОБРЕНО</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-number" id="moderatorsCount">0</div>
-                            <div class="neon-cyan">МОДЕРАТОРЫ</div>
+                            <div class="stat-number" id="rejectedCount">0</div>
+                            <div class="neon-cyan">ОТКЛОНЕНО</div>
                         </div>
                     </div>
                     
@@ -804,12 +889,16 @@
         <!-- Модальное окно пароля -->
         <div id="passwordModal" class="modal">
             <div class="modal-content">
-                <h3 class="modal-title neon-text">🔒 ДОСТУП К АДМИН ПАНЕЛИ</h3>
+                <h3 class="modal-title neon-text">🔒 ВХОД В АДМИН ПАНЕЛЬ</h3>
                 <input type="password" id="adminPassword" class="form-input" 
-                       placeholder="ВВЕДИТЕ ПАРОЛЬ АДМИНИСТРАТОРА">
+                       placeholder="ВВЕДИТЕ КОД ДОСТУПА"
+                       autocomplete="off">
                 <div style="display: flex; gap: 15px; margin-top: 25px;">
                     <button class="btn" onclick="checkPassword()">ВОЙТИ</button>
                     <button class="btn btn-delete" onclick="hideModal()">ОТМЕНА</button>
+                </div>
+                <div style="margin-top: 15px; text-align: center; color: #9370db; font-size: 0.9rem;">
+                    Код доступа для администраторов LaimeWorld
                 </div>
             </div>
         </div>
@@ -817,7 +906,7 @@
         <!-- Футер -->
         <footer>
             <div class="container">
-                <p class="neon-purple">MAJESTIC DM © 2024 | СИСТЕМА ЗАЯВОК</p>
+                <p class="neon-purple">LAIMEWORLD © 2024 | СИСТЕМА ЗАЯВОК</p>
                 <p style="color: #9370db; margin-top: 15px; font-size: 0.9rem;">
                     Для участников 12-18 лет | Все данные хранятся локально
                 </p>
@@ -827,8 +916,8 @@
 
     <script>
         // Конфигурация
-        const STORAGE_KEY = 'majestic_dm_applications';
-        const ADMIN_PASSWORD = 'MAJESTIC2024'; // Поменяйте этот пароль!
+        const STORAGE_KEY = 'laimeworld_applications';
+        const ADMIN_PASSWORD = 'LAIME2024'; // Измените этот код на свой!
 
         // Валидация возраста
         function validateAge(input) {
@@ -857,8 +946,15 @@
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             
-            document.getElementById(pageId + 'Page').classList.add('active');
-            document.querySelector(`.nav-btn[onclick*="${pageId}"]`).classList.add('active');
+            const pageElement = document.getElementById(pageId + 'Page');
+            if (pageElement) {
+                pageElement.classList.add('active');
+            }
+            
+            const navBtn = document.querySelector(`.nav-btn[onclick*="${pageId}"]`);
+            if (navBtn) {
+                navBtn.classList.add('active');
+            }
             
             if (pageId === 'admin') {
                 loadApplications();
@@ -895,14 +991,21 @@
 
         // Проверка пароля
         function checkPassword() {
-            const password = document.getElementById('adminPassword').value;
+            const password = document.getElementById('adminPassword').value.trim();
             if (password === ADMIN_PASSWORD) {
                 hideModal();
                 showPage('admin');
                 loadApplications();
             } else {
-                alert('❌ НЕВЕРНЫЙ ПАРОЛЬ!');
-                document.getElementById('adminPassword').value = '';
+                const input = document.getElementById('adminPassword');
+                input.style.borderColor = '#ff4444';
+                input.style.boxShadow = '0 0 10px rgba(255, 68, 68, 0.5)';
+                setTimeout(() => {
+                    input.style.borderColor = '#6a0dad';
+                    input.style.boxShadow = 'none';
+                }, 1000);
+                input.value = '';
+                input.focus();
             }
         }
 
@@ -917,22 +1020,355 @@
                 return;
             }
 
+            // Сбор данных
             const application = {
                 id: Date.now(),
+                date: new Date().toLocaleString('ru-RU'),
                 position: document.getElementById('position').value,
                 age: age,
-                nickname: document.getElementById('nickname').value,
-                telegram: document.getElementById('telegram').value,
+                nickname: document.getElementById('nickname').value.trim(),
+                telegram: document.getElementById('telegram').value.trim(),
                 time: document.getElementById('time').value,
-                experience: document.getElementById('experience').value,
-                whyUs: document.getElementById('whyUs').value,
-                rulesKnowledge: document.getElementById('rulesKnowledge').value,
-                cheaterScenario: document.getElementById('cheaterScenario').value,
-                conflictScenario: document.getElementById('conflictScenario').value,
-                ideas: document.getElementById('ideas').value,
-                strengths: document.getElementById('strengths').value,
-                weaknesses: document.getElementById('weaknesses').value,
-                teamwork: document.getElementById('teamwork').value,
-                builderPortfolio: document.getElementById('builderPortfolio').value,
-                testerMethod: document.getElementById('testerMethod').value,
-                scrip
+                experience: document.getElementById('experience').value.trim(),
+                whyUs: document.getElementById('whyUs').value.trim(),
+                rulesKnowledge: document.getElementById('rulesKnowledge').value.trim(),
+                cheaterScenario: document.getElementById('cheaterScenario').value.trim(),
+                conflictScenario: document.getElementById('conflictScenario').value.trim(),
+                ideas: document.getElementById('ideas').value.trim(),
+                strengths: document.getElementById('strengths').value.trim(),
+                weaknesses: document.getElementById('weaknesses').value.trim(),
+                teamwork: document.getElementById('teamwork').value.trim(),
+                builderPortfolio: document.getElementById('builderPortfolio').value.trim(),
+                testerMethod: document.getElementById('testerMethod').value.trim(),
+                scripterSkills: document.getElementById('scripterSkills').value.trim(),
+                goals: document.getElementById('goals').value.trim(),
+                status: 'pending' // Статус по умолчанию: на рассмотрении
+            };
+
+            // Сохранение в localStorage
+            const applications = getApplications();
+            applications.push(application);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(applications));
+
+            // Очистка формы
+            document.getElementById('applicationForm').reset();
+            const hiddenQuestions = document.getElementById('hiddenQuestions');
+            if (hiddenQuestions.classList.contains('show')) {
+                toggleQuestions();
+            }
+
+            // Показать уведомление
+            alert('✅ Заявка успешно отправлена!');
+            
+            // Сброс возраста
+            document.getElementById('age').style.borderColor = '#6a0dad';
+            document.getElementById('age').style.boxShadow = 'none';
+            const ageWarning = document.querySelector('.age-warning .neon-cyan');
+            if (ageWarning) {
+                ageWarning.style.color = '#00ced1';
+                ageWarning.textContent = '⚠ ВОЗРАСТ ОТ 12 ДО 18 ЛЕТ';
+            }
+        });
+
+        // Получить все заявки
+        function getApplications() {
+            const data = localStorage.getItem(STORAGE_KEY);
+            return data ? JSON.parse(data) : [];
+        }
+
+        // Загрузка заявок в админ-панель
+        function loadApplications() {
+            const applications = getApplications();
+            const applicationsList = document.getElementById('applicationsList');
+            
+            // Обновление статистики
+            updateStatistics(applications);
+            
+            if (applications.length === 0) {
+                applicationsList.innerHTML = `
+                    <div style="text-align: center; padding: 50px; color: #9370db;">
+                        <div style="font-size: 3rem; margin-bottom: 20px;">📭</div>
+                        <h3 style="margin-bottom: 10px;">НЕТ ЗАЯВОК</h3>
+                        <p>Пока никто не отправил заявку</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Сортировка: сначала новые
+            applications.sort((a, b) => b.id - a.id);
+            
+            // Отображение заявок
+            applicationsList.innerHTML = applications.map(app => `
+                <div class="application-card" id="app-${app.id}">
+                    <div class="application-header">
+                        <div class="application-info">
+                            <div class="application-position">${app.position}</div>
+                            <div class="application-user">${app.nickname} | ${app.telegram}</div>
+                            <div class="application-age">${app.age} лет | ${app.time || 'Не указано'}</div>
+                            <div style="font-size: 0.9rem; color: #888; margin-top: 5px;">
+                                ${app.date}
+                            </div>
+                        </div>
+                        <div class="application-status status-${app.status}">
+                            ${getStatusText(app.status)}
+                        </div>
+                    </div>
+                    
+                    <div class="application-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Опыт работы:</div>
+                            <div class="detail-value">${app.experience || 'Не указано'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Почему выбрал нас:</div>
+                            <div class="detail-value">${app.whyUs || 'Не указано'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Знание правил:</div>
+                            <div class="detail-value">${app.rulesKnowledge || 'Не указано'}</div>
+                        </div>
+                        ${app.ideas ? `
+                        <div class="detail-item">
+                            <div class="detail-label">Идеи для улучшения:</div>
+                            <div class="detail-value">${app.ideas}</div>
+                        </div>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="admin-controls">
+                        ${app.status === 'pending' ? `
+                            <button class="btn btn-sm btn-approve" onclick="changeStatus(${app.id}, 'approved')">
+                                ✅ ОДОБРИТЬ
+                            </button>
+                            <button class="btn btn-sm btn-reject" onclick="changeStatus(${app.id}, 'rejected')">
+                                ❌ ОТКЛОНИТЬ
+                            </button>
+                        ` : ''}
+                        <button class="btn btn-sm btn-view" onclick="viewApplication(${app.id})">
+                            👁️ ПРОСМОТР
+                        </button>
+                        <button class="btn btn-sm btn-delete" onclick="deleteApplication(${app.id})">
+                            🗑️ УДАЛИТЬ
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Получить текст статуса
+        function getStatusText(status) {
+            switch(status) {
+                case 'pending': return 'НА РАССМОТРЕНИИ';
+                case 'approved': return 'ОДОБРЕНО';
+                case 'rejected': return 'ОТКЛОНЕНО';
+                default: return 'НЕИЗВЕСТНО';
+            }
+        }
+
+        // Изменить статус заявки
+        function changeStatus(appId, newStatus) {
+            if (!confirm(`Вы уверены, что хотите ${newStatus === 'approved' ? 'одобрить' : 'отклонить'} эту заявку?`)) {
+                return;
+            }
+            
+            const applications = getApplications();
+            const appIndex = applications.findIndex(app => app.id === appId);
+            
+            if (appIndex !== -1) {
+                applications[appIndex].status = newStatus;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(applications));
+                loadApplications();
+                
+                alert(`✅ Заявка ${newStatus === 'approved' ? 'одобрена' : 'отклонена'}!`);
+            }
+        }
+
+        // Просмотр полной заявки
+        function viewApplication(appId) {
+            const applications = getApplications();
+            const app = applications.find(app => app.id === appId);
+            
+            if (!app) return;
+            
+            const details = `
+                <div style="max-height: 70vh; overflow-y: auto; padding-right: 10px;">
+                    <h3 style="color: #9370db; margin-bottom: 20px; text-align: center;">
+                        ПОЛНАЯ ИНФОРМАЦИЯ О ЗАЯВКЕ
+                    </h3>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                        <div>
+                            <div class="detail-label">Должность:</div>
+                            <div class="detail-value">${app.position}</div>
+                        </div>
+                        <div>
+                            <div class="detail-label">Статус:</div>
+                            <div class="detail-value" style="color: ${app.status === 'approved' ? '#00ff00' : app.status === 'rejected' ? '#ff5555' : '#ffa500'}">
+                                ${getStatusText(app.status)}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                        <div>
+                            <div class="detail-label">Никнейм:</div>
+                            <div class="detail-value">${app.nickname}</div>
+                        </div>
+                        <div>
+                            <div class="detail-label">Telegram:</div>
+                            <div class="detail-value">${app.telegram}</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                        <div>
+                            <div class="detail-label">Возраст:</div>
+                            <div class="detail-value">${app.age} лет</div>
+                        </div>
+                        <div>
+                            <div class="detail-label">Время в день:</div>
+                            <div class="detail-value">${app.time || 'Не указано'}</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div class="detail-label">Опыт работы:</div>
+                        <div class="detail-value" style="background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
+                            ${app.experience || 'Не указано'}
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div class="detail-label">Почему выбрал нас:</div>
+                        <div class="detail-value" style="background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
+                            ${app.whyUs || 'Не указано'}
+                        </div>
+                    </div>
+                    
+                    ${app.cheaterScenario ? `
+                    <div style="margin-bottom: 20px;">
+                        <div class="detail-label">Действия при читере:</div>
+                        <div class="detail-value" style="background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
+                            ${app.cheaterScenario}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${app.conflictScenario ? `
+                    <div style="margin-bottom: 20px;">
+                        <div class="detail-label">Решение конфликтов:</div>
+                        <div class="detail-value" style="background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
+                            ${app.conflictScenario}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${app.ideas ? `
+                    <div style="margin-bottom: 20px;">
+                        <div class="detail-label">Идеи для улучшения:</div>
+                        <div class="detail-value" style="background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
+                            ${app.ideas}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${app.strengths ? `
+                    <div style="margin-bottom: 20px;">
+                        <div class="detail-label">Сильные стороны:</div>
+                        <div class="detail-value" style="background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
+                            ${app.strengths}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${app.builderPortfolio ? `
+                    <div style="margin-bottom: 20px;">
+                        <div class="detail-label">Примеры работ (билдер):</div>
+                        <div class="detail-value" style="background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
+                            ${app.builderPortfolio}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${app.scripterSkills ? `
+                    <div style="margin-bottom: 20px;">
+                        <div class="detail-label">Навыки (скриптер):</div>
+                        <div class="detail-value" style="background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
+                            ${app.scripterSkills}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div class="detail-label">Дата подачи:</div>
+                        <div class="detail-value">${app.date}</div>
+                    </div>
+                </div>
+            `;
+            
+            alertWithHTML(details, 'Просмотр заявки');
+        }
+
+        // Удаление заявки
+        function deleteApplication(appId) {
+            if (!confirm('Вы уверены, что хотите удалить эту заявку? Это действие нельзя отменить.')) {
+                return;
+            }
+            
+            const applications = getApplications();
+            const filteredApplications = applications.filter(app => app.id !== appId);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(filteredApplications));
+            loadApplications();
+            
+            alert('✅ Заявка удалена!');
+        }
+
+        // Обновление статистики
+        function updateStatistics(applications) {
+            const total = applications.length;
+            const pending = applications.filter(app => app.status === 'pending').length;
+            const approved = applications.filter(app => app.status === 'approved').length;
+            const rejected = applications.filter(app => app.status === 'rejected').length;
+            
+            document.getElementById('totalCount').textContent = total;
+            document.getElementById('pendingCount').textContent = pending;
+            document.getElementById('approvedCount').textContent = approved;
+            document.getElementById('rejectedCount').textContent = rejected;
+        }
+
+        // Вспомогательная функция для алерта с HTML
+        function alertWithHTML(content, title = '') {
+            const modal = document.createElement('div');
+            modal.className = 'modal active';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 700px;">
+                    ${title ? `<h3 class="modal-title">${title}</h3>` : ''}
+                    ${content}
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button class="btn" onclick="this.closest('.modal').remove()">ЗАКРЫТЬ</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Слушатель для клавиши Enter в поле пароля
+        document.getElementById('adminPassword').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            // Проверяем, есть ли сохраненные данные
+            const applications = getApplications();
+            updateStatistics(applications);
+            
+            // Скрываем админ-панель при загрузке
+            document.getElementById('adminPage').classList.remove('active');
+        });
+    </script>
+</body>
+</html>
