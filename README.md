@@ -260,26 +260,6 @@
             font-weight: 600;
         }
 
-        /* Скрытые вопросы для ролей */
-        .role-specific-questions {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(30, 25, 45, 0.7);
-            border-radius: 10px;
-            border-left: 4px solid #8a2be2;
-            animation: slideDown 0.3s ease;
-        }
-
-        .role-specific-questions.show {
-            display: block;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; max-height: 0; }
-            to { opacity: 1; max-height: 2000px; }
-        }
-
         /* Страница проверки статуса */
         .check-status-card {
             background: rgba(20, 15, 35, 0.85);
@@ -288,11 +268,6 @@
             padding: 40px;
             margin-bottom: 30px;
             text-align: center;
-        }
-
-        .id-input-group {
-            max-width: 400px;
-            margin: 30px auto;
         }
 
         .id-display {
@@ -430,6 +405,38 @@
             border: 1px solid rgba(255, 0, 0, 0.3);
         }
 
+        .application-details {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(30, 25, 45, 0.5);
+            border-radius: 8px;
+            border-left: 3px solid #9370db;
+        }
+
+        .detail-item {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(107, 13, 173, 0.2);
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .detail-label {
+            color: #9370db;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 3px;
+        }
+
+        .detail-value {
+            color: #e0e0ff;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
         .admin-controls {
             display: flex;
             gap: 12px;
@@ -441,6 +448,19 @@
             padding: 10px 20px;
             font-size: 0.9rem;
             border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-sm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .btn-approve {
@@ -549,6 +569,14 @@
             display: block;
         }
 
+        .notification.error {
+            border-left: 5px solid #ff4444;
+        }
+
+        .notification.success {
+            border-left: 5px solid #00ff00;
+        }
+
         @keyframes slideInRight {
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
@@ -574,6 +602,34 @@
             border-color: #9370db;
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(138, 43, 226, 0.3);
+        }
+
+        /* Фильтры */
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(40, 35, 60, 0.7);
+            color: #b19cd9;
+            border: 1px solid #6a0dad;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background: rgba(75, 0, 130, 0.3);
+        }
+
+        .filter-btn.active {
+            background: rgba(138, 43, 226, 0.3);
+            border-color: #9370db;
+            color: white;
         }
 
         /* Футер */
@@ -625,6 +681,10 @@
                 margin-left: 0;
                 align-self: flex-start;
             }
+            
+            .filters {
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -672,13 +732,13 @@
                                 <span class="form-icon">🎯</span>
                                 ВЫБЕРИТЕ ДОЛЖНОСТЬ:
                             </label>
-                            <select class="form-select" id="position" required onchange="showRoleQuestions()">
+                            <select class="form-select" id="position" required>
                                 <option value="">-- ВЫБЕРИТЕ РОЛЬ --</option>
                                 <option value="АДМИНИСТРАТОР">👑 АДМИНИСТРАТОР</option>
+                                <option value="СТАРШИЙ МОДЕРАТОР">⭐ СТАРШИЙ МОДЕРАТОР</option>
                                 <option value="МОДЕРАТОР">🛡️ МОДЕРАТОР</option>
-                                <option value="БИЛДЕР">🏗️ БИЛДЕР</option>
+                                <option value="ХЕЛПЕР">💫 ХЕЛПЕР</option>
                                 <option value="ТЕСТЕР">🔧 ТЕСТЕР</option>
-                                <option value="СКРИПТЕР">⚡ СКРИПТЕР</option>
                             </select>
                         </div>
 
@@ -688,7 +748,7 @@
                                 СКОЛЬКО ВАМ ЛЕТ? (ОТ 13):
                             </label>
                             <input type="number" class="form-input" id="age" min="13" required 
-                                   oninput="validateAge(this)">
+                                   placeholder="Введите ваш возраст">
                             <div style="margin-top: 8px; font-size: 0.9rem; color: #9370db;">
                                 Минимальный возраст: 13 лет
                             </div>
@@ -697,7 +757,7 @@
                         <div class="form-group">
                             <label class="form-label">
                                 <span class="form-icon">👤</span>
-                                ВАШ НИКНЕЙМ:
+                                ВАШ НИКНЕЙМ В MINECRAFT:
                             </label>
                             <input type="text" class="form-input" id="nickname" required 
                                    placeholder="Например: LaimePlayer">
@@ -715,38 +775,133 @@
                         <div class="form-group">
                             <label class="form-label">
                                 <span class="form-icon">⏰</span>
-                                СКОЛЬКО ВРЕМЕНИ МОЖЕТЕ УДЕЛЯТЬ?
+                                СКОЛЬКО ЧАСОВ В ДЕНЬ МОЖЕТЕ УДЕЛЯТЬ ПРОЕКТУ?
                             </label>
                             <select class="form-select" id="time" required>
                                 <option value="">-- ВЫБЕРИТЕ --</option>
-                                <option value="1-2 часа в день">1-2 часа в день</option>
-                                <option value="3-4 часа в день">3-4 часа в день</option>
-                                <option value="5+ часов в день">5+ часов в день</option>
+                                <option value="1-2 часа">1-2 часа в день</option>
+                                <option value="3-4 часа">3-4 часа в день</option>
+                                <option value="5+ часов">5+ часов в день</option>
                                 <option value="Только по выходным">Только по выходным</option>
+                                <option value="Более 8 часов">Более 8 часов в день</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">
-                                <span class="form-icon">💼</span>
-                                ОПЫТ РАБОТЫ НА ПОХОЖИХ ДОЛЖНОСТЯХ:
-                                <span class="optional">(не обязательно)</span>
+                                <span class="form-icon">🎮</span>
+                                ИГРАЕТЕ ЛИ ВЫ НА НАШЕМ ПРОЕКТЕ В МОМЕНТ ПОДАЧИ ЗАЯВКИ?
                             </label>
-                            <textarea class="form-textarea" id="experience" 
-                                      placeholder="Где и кем работали ранее? Какой был опыт? (не обязательно)"></textarea>
+                            <select class="form-select" id="playingNow" required>
+                                <option value="">-- ВЫБЕРИТЕ --</option>
+                                <option value="Да, регулярно играю">Да, регулярно играю</option>
+                                <option value="Иногда захожу">Иногда захожу</option>
+                                <option value="Только начал(а)">Только начал(а) играть</option>
+                                <option value="Нет, но планирую">Нет, но планирую начать</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="form-icon">📊</span>
+                                ОПЫТ РАБОТЫ НА ДРУГИХ ПРОЕКТАХ:
+                            </label>
+                            <textarea class="form-textarea" id="experience" required rows="3"
+                                      placeholder="Был ли у вас опыт работы на других проектах? Если да, опишите его подробно"></textarea>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">
                                 <span class="form-icon">❓</span>
-                                ПОЧЕМУ ИМЕННО МЫ? ЧЕМ ПОНРАВИЛСЯ ПРОЕКТ?
+                                ПОЧЕМУ ИМЕННО ВЫ ДОЛЖНЫ ПОЛУЧИТЬ ЭТУ ДОЛЖНОСТЬ?
                             </label>
-                            <textarea class="form-textarea" id="whyUs" required 
-                                      placeholder="Почему выбрали именно наш проект? Что вам в нем нравится?"></textarea>
+                            <textarea class="form-textarea" id="whyMe" required rows="3"
+                                      placeholder="Почему мы должны выбрать именно вас?"></textarea>
                         </div>
 
-                        <!-- Вопросы для ролей -->
-                        <div id="roleQuestions"></div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="form-icon">🎯</span>
+                                ЧЕГО ВЫ ОЖИДАЕТЕ ОТ РАБОТЫ НА ПРОЕКТЕ?
+                            </label>
+                            <textarea class="form-textarea" id="expectations" required rows="3"
+                                      placeholder="Какие цели вы ставите перед собой?"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="form-icon">🚫</span>
+                                КАК ВЫ БУДЕТЕ РЕАГИРОВАТЬ НА ОСКОРБЛЕНИЯ И ПРОВОКАЦИИ?
+                            </label>
+                            <textarea class="form-textarea" id="reactionToInsults" required rows="3"
+                                      placeholder="Опишите вашу реакцию на провокации игроков"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="form-icon">⚖️</span>
+                                СИТУАЦИЯ: ИГРОК НАРУШАЕТ ПРАВИЛА, НО УПОРНО ОТРИЦАЕТ ЭТО. ВАШИ ДЕЙСТВИЯ?
+                            </label>
+                            <textarea class="form-textarea" id="denialScenario" required rows="3"
+                                      placeholder="Как вы будете действовать в такой ситуации?"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="form-icon">👥</span>
+                                КАК ВЫ ОТНОСИТЕСЬ К РАБОТЕ В КОМАНДЕ?
+                            </label>
+                            <textarea class="form-textarea" id="teamwork" required rows="3"
+                                      placeholder="Опишите ваш опыт и отношение к командной работе"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="form-icon">💡</span>
+                                ЕСТЬ ЛИ У ВАС ИДЕИ ДЛЯ УЛУЧШЕНИЯ ПРОЕКТА?
+                                <span class="optional">(не обязательно)</span>
+                            </label>
+                            <textarea class="form-textarea" id="ideas" rows="3"
+                                      placeholder="Предложите свои идеи для улучшения проекта (не обязательно)"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="form-icon">📚</span>
+                                ЗНАКОМЫ ЛИ ВЫ С ПРАВИЛАМИ ПРОЕКТА?
+                            </label>
+                            <select class="form-select" id="rulesKnowledge" required>
+                                <option value="">-- ВЫБЕРИТЕ --</option>
+                                <option value="Да, знаю все правила">Да, знаю все правила</option>
+                                <option value="Знаю основные правила">Знаю основные правила</option>
+                                <option value="Ознакомлюсь при необходимости">Ознакомлюсь при необходимости</option>
+                                <option value="Требуется повторение">Требуется повторение правил</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="form-icon">🔧</span>
+                                ДОПОЛНИТЕЛЬНЫЕ НАВЫКИ (СКРИПТЫ, БИЛД И Т.Д.):
+                                <span class="optional">(не обязательно)</span>
+                            </label>
+                            <textarea class="form-textarea" id="additionalSkills" rows="3"
+                                      placeholder="Есть ли у вас дополнительные навыки? (не обязательно)"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="form-icon">🎤</span>
+                                ГОТОВЫ ЛИ ВЫ ОБЩАТЬСЯ В ГОЛОСОВОМ ЧАТЕ ПРИ НЕОБХОДИМОСТИ?
+                            </label>
+                            <select class="form-select" id="voiceChat" required>
+                                <option value="">-- ВЫБЕРИТЕ --</option>
+                                <option value="Да, готов общаться">Да, готов общаться</option>
+                                <option value="Только в крайнем случае">Только в крайнем случае</option>
+                                <option value="Предпочитаю текст">Предпочитаю текстовый чат</option>
+                                <option value="Нет, не готов">Нет, не готов</option>
+                            </select>
+                        </div>
 
                         <!-- ID заявки -->
                         <div class="form-group" id="applicationIdContainer" style="display: none;">
@@ -776,19 +931,19 @@
                 <div class="positions-grid">
                     <div class="position-item">
                         <h3 class="neon-purple">👑 АДМИНИСТРАТОР</h3>
-                        <p>Управление проектом, руководство командой, стратегическое развитие LaimeWorld.</p>
+                        <p>Полное управление проектом, руководство командой, разработка стратегии, решение глобальных вопросов.</p>
+                    </div>
+                    <div class="position-item">
+                        <h3 class="neon-purple">⭐ СТАРШИЙ МОДЕРАТОР</h3>
+                        <p>Руководство модераторами, контроль качества работы, обучение нового персонала.</p>
                     </div>
                     <div class="position-item">
                         <h3 class="neon-purple">🛡️ МОДЕРАТОР</h3>
-                        <p>Контроль за соблюдением правил, помощь игрокам, решение конфликтов.</p>
+                        <p>Контроль за соблюдением правил, помощь игрокам, решение конфликтов, выдача наказаний.</p>
                     </div>
                     <div class="position-item">
-                        <h3 class="neon-purple">🏗️ БИЛДЕР</h3>
-                        <p>Создание построек, дизайн карт, работа с ландшафтом.</p>
-                    </div>
-                    <div class="position-item">
-                        <h3 class="neon-purple">🔧 ТЕСТЕР</h3>
-                        <p>Поиск багов, тестирование обновлений, проверка стабильности.</p>
+                        <h3 class="neon-purple">💫 ХЕЛПЕР</h3>
+                        <p>Помощь новым игрокам, ответы на вопросы, поддержание дружелюбной атмосферы.</p>
                     </div>
                 </div>
             </div>
@@ -823,6 +978,14 @@
             <div id="adminPage" class="page">
                 <div class="admin-card">
                     <h2 class="form-title">🔐 ПАНЕЛЬ УПРАВЛЕНИЯ LAIMEWORLD</h2>
+                    
+                    <!-- Фильтры -->
+                    <div class="filters">
+                        <button class="filter-btn active" onclick="filterApplications('all')">📋 ВСЕ</button>
+                        <button class="filter-btn" onclick="filterApplications('pending')">🟡 НА РАССМОТРЕНИИ</button>
+                        <button class="filter-btn" onclick="filterApplications('approved')">🟢 ОДОБРЕНО</button>
+                        <button class="filter-btn" onclick="filterApplications('rejected')">🔴 ОТКЛОНЕНО</button>
+                    </div>
                     
                     <!-- Статистика -->
                     <div class="stats-grid">
@@ -890,6 +1053,7 @@
         // Конфигурация
         const STORAGE_KEY = 'laimeworld_applications';
         const ADMIN_PASSWORD = 'Wizixc1LW'; // Пароль для админ панели
+        let currentFilter = 'all';
 
         // Генерация ID для заявки
         function generateApplicationId() {
@@ -919,156 +1083,6 @@
                     ageWarning.textContent = '✅ ВОЗРАСТ ПОДХОДИТ';
                 }
             }
-        }
-
-        // Показать вопросы для конкретной роли
-        function showRoleQuestions() {
-            const position = document.getElementById('position').value;
-            const roleQuestions = document.getElementById('roleQuestions');
-            
-            let questionsHTML = '';
-            
-            switch(position) {
-                case 'БИЛДЕР':
-                    questionsHTML = `
-                        <div class="role-specific-questions show">
-                            <h3 style="color: #9370db; margin-bottom: 15px; text-align: center;">🏗️ ВОПРОСЫ ДЛЯ БИЛДЕРА</h3>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">🏰</span>
-                                    ПРИМЕРЫ ВАШИХ РАБОТ:
-                                    <span class="optional">(не обязательно)</span>
-                                </label>
-                                <textarea class="form-textarea" id="builderPortfolio" 
-                                          placeholder="Ссылки на скриншоты или видео ваших построек (не обязательно)"></textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">🎨</span>
-                                    КАКОЙ СТИЛЬ ПОСТРОЕК ПРЕДПОЧИТАЕТЕ?
-                                </label>
-                                <textarea class="form-textarea" id="builderStyle" required 
-                                          placeholder="Опишите ваш стиль построек, любимые техники"></textarea>
-                            </div>
-                        </div>
-                    `;
-                    break;
-                    
-                case 'СКРИПТЕР':
-                    questionsHTML = `
-                        <div class="role-specific-questions show">
-                            <h3 style="color: #9370db; margin-bottom: 15px; text-align: center;">⚡ ВОПРОСЫ ДЛЯ СКРИПТЕРА</h3>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">💻</span>
-                                    ЯЗЫКИ ПРОГРАММИРОВАНИЯ КОТОРЫЕ ЗНАЕТЕ:
-                                </label>
-                                <textarea class="form-textarea" id="scripterSkills" required 
-                                          placeholder="Какие языки программирования знаете?"></textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">📁</span>
-                                    ПРИМЕРЫ ВАШИХ РАБОТ:
-                                    <span class="optional">(не обязательно)</span>
-                                </label>
-                                <textarea class="form-textarea" id="scripterPortfolio" 
-                                          placeholder="Ссылки на ваши проекты или код (не обязательно)"></textarea>
-                            </div>
-                        </div>
-                    `;
-                    break;
-                    
-                case 'ТЕСТЕР':
-                    questionsHTML = `
-                        <div class="role-specific-questions show">
-                            <h3 style="color: #9370db; margin-bottom: 15px; text-align: center;">🔧 ВОПРОСЫ ДЛЯ ТЕСТЕРА</h3>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">🔍</span>
-                                    КАК ВЫ ИЩЕТЕ БАГИ И ОШИБКИ?
-                                </label>
-                                <textarea class="form-textarea" id="testerMethod" required 
-                                          placeholder="Опишите ваш метод поиска багов"></textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">📋</span>
-                                    КАК СОСТАВЛЯЕТЕ ОТЧЕТЫ О БАГАХ?
-                                    <span class="optional">(не обязательно)</span>
-                                </label>
-                                <textarea class="form-textarea" id="testerReports" 
-                                          placeholder="Как вы оформляете отчеты о найденных багах? (не обязательно)"></textarea>
-                            </div>
-                        </div>
-                    `;
-                    break;
-                    
-                case 'МОДЕРАТОР':
-                    questionsHTML = `
-                        <div class="role-specific-questions show">
-                            <h3 style="color: #9370db; margin-bottom: 15px; text-align: center;">🛡️ ВОПРОСЫ ДЛЯ МОДЕРАТОРА</h3>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">⚖️</span>
-                                    СИТУАЦИЯ: ИГРОК НАРУШАЕТ ПРАВИЛА. ВАШИ ДЕЙСТВИЯ?
-                                </label>
-                                <textarea class="form-textarea" id="moderatorScenario" required 
-                                          placeholder="Опишите шаг за шагом ваши действия"></textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">🤝</span>
-                                    КАК РЕШАЕТЕ КОНФЛИКТЫ МЕЖДУ ИГРОКАМИ?
-                                </label>
-                                <textarea class="form-textarea" id="conflictResolution" required 
-                                          placeholder="Опишите ваш подход к решению конфликтов"></textarea>
-                            </div>
-                        </div>
-                    `;
-                    break;
-                    
-                case 'АДМИНИСТРАТОР':
-                    questionsHTML = `
-                        <div class="role-specific-questions show">
-                            <h3 style="color: #9370db; margin-bottom: 15px; text-align: center;">👑 ВОПРОСЫ ДЛЯ АДМИНИСТРАТОРА</h3>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">🎯</span>
-                                    КАКИЕ У ВАС ИДЕИ ДЛЯ РАЗВИТИЯ ПРОЕКТА?
-                                    <span class="optional">(не обязательно)</span>
-                                </label>
-                                <textarea class="form-textarea" id="adminIdeas" 
-                                          placeholder="Какие улучшения предлагаете для проекта? (не обязательно)"></textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <span class="form-icon">👥</span>
-                                    ОПЫТ УПРАВЛЕНИЯ КОМАНДОЙ:
-                                </label>
-                                <textarea class="form-textarea" id="managementExperience" required 
-                                          placeholder="Был ли у вас опыт управления командой?"></textarea>
-                            </div>
-                        </div>
-                    `;
-                    break;
-                    
-                default:
-                    roleQuestions.innerHTML = '';
-                    return;
-            }
-            
-            roleQuestions.innerHTML = questionsHTML;
         }
 
         // Показать/скрыть страницы
@@ -1119,7 +1133,7 @@
                 }, 1000);
                 input.value = '';
                 input.focus();
-                showNotification('Ошибка', '❌ Неверный код доступа!');
+                showNotification('Ошибка', '❌ Неверный код доступа!', 'error');
             }
         }
 
@@ -1129,52 +1143,48 @@
             
             // Проверка возраста
             const age = parseInt(document.getElementById('age').value);
-            if (age < 13) {
-                showNotification('Ошибка', '❌ Минимальный возраст 13 лет!');
+            if (age < 13 || isNaN(age)) {
+                showNotification('Ошибка', '❌ Минимальный возраст 13 лет!', 'error');
                 return;
+            }
+
+            // Проверка заполнения обязательных полей
+            const requiredFields = ['position', 'nickname', 'telegram', 'time', 'playingNow', 'experience', 'whyMe', 'expectations', 'reactionToInsults', 'denialScenario', 'teamwork', 'rulesKnowledge', 'voiceChat'];
+            for (const fieldId of requiredFields) {
+                const field = document.getElementById(fieldId);
+                if (!field.value.trim()) {
+                    showNotification('Ошибка', `❌ Заполните поле: ${field.previousElementSibling.textContent}`, 'error');
+                    field.focus();
+                    return;
+                }
             }
 
             // Генерация ID
             const appId = generateApplicationId();
             
-            // Сбор данных в зависимости от роли
-            const position = document.getElementById('position').value;
-            let application = {
+            // Сбор данных
+            const application = {
                 id: appId,
                 date: new Date().toLocaleString('ru-RU'),
-                position: position,
+                position: document.getElementById('position').value,
                 age: age,
                 nickname: document.getElementById('nickname').value.trim(),
                 telegram: document.getElementById('telegram').value.trim(),
                 time: document.getElementById('time').value,
-                experience: document.getElementById('experience').value.trim() || 'Не указано',
-                whyUs: document.getElementById('whyUs').value.trim(),
-                status: 'pending'
+                playingNow: document.getElementById('playingNow').value,
+                experience: document.getElementById('experience').value.trim(),
+                whyMe: document.getElementById('whyMe').value.trim(),
+                expectations: document.getElementById('expectations').value.trim(),
+                reactionToInsults: document.getElementById('reactionToInsults').value.trim(),
+                denialScenario: document.getElementById('denialScenario').value.trim(),
+                teamwork: document.getElementById('teamwork').value.trim(),
+                ideas: document.getElementById('ideas').value.trim() || 'Не указано',
+                rulesKnowledge: document.getElementById('rulesKnowledge').value,
+                additionalSkills: document.getElementById('additionalSkills').value.trim() || 'Не указано',
+                voiceChat: document.getElementById('voiceChat').value,
+                status: 'pending',
+                adminComment: ''
             };
-
-            // Добавляем данные в зависимости от роли
-            switch(position) {
-                case 'БИЛДЕР':
-                    application.builderPortfolio = document.getElementById('builderPortfolio')?.value.trim() || 'Не указано';
-                    application.builderStyle = document.getElementById('builderStyle')?.value.trim() || 'Не указано';
-                    break;
-                case 'СКРИПТЕР':
-                    application.scripterSkills = document.getElementById('scripterSkills')?.value.trim() || 'Не указано';
-                    application.scripterPortfolio = document.getElementById('scripterPortfolio')?.value.trim() || 'Не указано';
-                    break;
-                case 'ТЕСТЕР':
-                    application.testerMethod = document.getElementById('testerMethod')?.value.trim() || 'Не указано';
-                    application.testerReports = document.getElementById('testerReports')?.value.trim() || 'Не указано';
-                    break;
-                case 'МОДЕРАТОР':
-                    application.moderatorScenario = document.getElementById('moderatorScenario')?.value.trim() || 'Не указано';
-                    application.conflictResolution = document.getElementById('conflictResolution')?.value.trim() || 'Не указано';
-                    break;
-                case 'АДМИНИСТРАТОР':
-                    application.adminIdeas = document.getElementById('adminIdeas')?.value.trim() || 'Не указано';
-                    application.managementExperience = document.getElementById('managementExperience')?.value.trim() || 'Не указано';
-                    break;
-            }
 
             // Сохранение в localStorage
             const applications = getApplications();
@@ -1188,7 +1198,13 @@
             // Прокрутить к ID
             document.getElementById('applicationIdContainer').scrollIntoView({ behavior: 'smooth' });
 
-            showNotification('Успех', `✅ Заявка отправлена! Ваш ID: ${appId}`);
+            showNotification('Успех', `✅ Заявка отправлена! Ваш ID: ${appId}`, 'success');
+            
+            // Сброс формы через 5 секунд
+            setTimeout(() => {
+                document.getElementById('applicationForm').reset();
+                document.getElementById('applicationIdContainer').style.display = 'none';
+            }, 5000);
         });
 
         // Копировать ID заявки
@@ -1197,10 +1213,14 @@
             navigator.clipboard.writeText(id).then(() => {
                 const btn = document.querySelector('.copy-btn');
                 btn.textContent = '✅ СКОПИРОВАНО';
-                btn.classList.add('copied');
+                btn.style.background = 'rgba(0, 255, 0, 0.2)';
+                btn.style.color = '#00ff00';
+                btn.style.borderColor = '#00ff00';
                 setTimeout(() => {
                     btn.textContent = '📋 КОПИРОВАТЬ ID';
-                    btn.classList.remove('copied');
+                    btn.style.background = '';
+                    btn.style.color = '';
+                    btn.style.borderColor = '';
                 }, 2000);
             });
         }
@@ -1265,6 +1285,9 @@
                         <div style="font-size: 1.5rem; color: ${application.status === 'approved' ? '#00ff00' : application.status === 'rejected' ? '#ff5555' : '#ffa500'}; font-weight: 700;">
                             ${statusText}
                         </div>
+                        <div style="margin-top: 5px; color: #9370db; font-size: 0.9rem;">
+                            Дата подачи: ${application.date}
+                        </div>
                     </div>
                     
                     <div style="margin-bottom: 15px;">
@@ -1282,22 +1305,42 @@
                         <div style="color: #e0e0ff;">${application.nickname}</div>
                     </div>
                     
-                    <div style="margin-bottom: 15px;">
-                        <div style="color: #9370db; font-weight: 600;">Дата подачи:</div>
-                        <div style="color: #e0e0ff;">${application.date}</div>
-                    </div>
-                    
                     ${application.status === 'approved' ? `
                         <div style="margin-top: 20px; padding: 15px; background: rgba(0, 255, 0, 0.1); border-radius: 8px; text-align: center;">
                             <div style="color: #00ff00; font-weight: 700; margin-bottom: 5px;">🎉 ПОЗДРАВЛЯЕМ!</div>
-                            <div style="color: #e0e0ff;">С вами свяжется администратор в Telegram</div>
+                            <div style="color: #e0e0ff;">Ваша заявка одобрена! С вами свяжется администратор в Telegram: ${application.telegram}</div>
+                            ${application.adminComment ? `
+                                <div style="margin-top: 10px; padding: 10px; background: rgba(138, 43, 226, 0.1); border-radius: 5px;">
+                                    <div style="color: #9370db; font-weight: 600;">Комментарий администратора:</div>
+                                    <div style="color: #e0e0ff;">${application.adminComment}</div>
+                                </div>
+                            ` : ''}
                         </div>
                     ` : ''}
                     
                     ${application.status === 'rejected' ? `
                         <div style="margin-top: 20px; padding: 15px; background: rgba(255, 0, 0, 0.1); border-radius: 8px; text-align: center;">
                             <div style="color: #ff5555; font-weight: 700; margin-bottom: 5px;">😔 ЗАЯВКА ОТКЛОНЕНА</div>
-                            <div style="color: #e0e0ff;">Попробуйте подать заявку снова через некоторое время</div>
+                            <div style="color: #e0e0ff;">К сожалению, ваша заявка была отклонена.</div>
+                            ${application.adminComment ? `
+                                <div style="margin-top: 10px; padding: 10px; background: rgba(255, 68, 68, 0.1); border-radius: 5px;">
+                                    <div style="color: #ff5555; font-weight: 600;">Причина отказа:</div>
+                                    <div style="color: #e0e0ff;">${application.adminComment}</div>
+                                </div>
+                            ` : ''}
+                            <div style="margin-top: 10px; color: #9370db;">
+                                Вы можете подать заявку снова через 30 дней
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    ${application.status === 'pending' ? `
+                        <div style="margin-top: 20px; padding: 15px; background: rgba(255, 165, 0, 0.1); border-radius: 8px; text-align: center;">
+                            <div style="color: #ffa500; font-weight: 700; margin-bottom: 5px;">⏳ ЗАЯВКА НА РАССМОТРЕНИИ</div>
+                            <div style="color: #e0e0ff;">Ваша заявка находится на рассмотрении администрацией.</div>
+                            <div style="margin-top: 10px; color: #9370db;">
+                                Обычно рассмотрение занимает 1-3 дня
+                            </div>
                         </div>
                     ` : ''}
                 </div>
@@ -1310,20 +1353,38 @@
             return data ? JSON.parse(data) : [];
         }
 
+        // Фильтрация заявок
+        function filterApplications(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            loadApplications();
+        }
+
         // Загрузка заявок в админ-панель
         function loadApplications() {
-            const applications = getApplications();
+            let applications = getApplications();
             const applicationsList = document.getElementById('applicationsList');
             
-            // Обновление статистики
-            updateStatistics(applications);
+            // Применение фильтра
+            if (currentFilter !== 'all') {
+                applications = applications.filter(app => app.status === currentFilter);
+            }
+            
+            // Обновление статистики (по всем заявкам)
+            updateStatistics(getApplications());
             
             if (applications.length === 0) {
                 applicationsList.innerHTML = `
                     <div style="text-align: center; padding: 50px; color: #9370db;">
                         <div style="font-size: 3rem; margin-bottom: 20px;">📭</div>
-                        <h3 style="margin-bottom: 10px;">НЕТ ЗАЯВОК</h3>
-                        <p>Пока никто не отправил заявку</p>
+                        <h3 style="margin-bottom: 10px;">
+                            ${currentFilter === 'all' ? 'НЕТ ЗАЯВОК' : 
+                              currentFilter === 'pending' ? 'НЕТ ЗАЯВОК НА РАССМОТРЕНИИ' :
+                              currentFilter === 'approved' ? 'НЕТ ОДОБРЕННЫХ ЗАЯВОК' :
+                              'НЕТ ОТКЛОНЕННЫХ ЗАЯВОК'}
+                        </h3>
+                        <p>${currentFilter === 'all' ? 'Пока никто не отправил заявку' : 'Нет заявок с таким статусом'}</p>
                     </div>
                 `;
                 return;
@@ -1351,38 +1412,38 @@
                     </div>
                     
                     <div class="application-details">
-                        <div style="margin-bottom: 10px;">
-                            <div style="color: #9370db; font-weight: 600;">⏰ Время:</div>
-                            <div style="color: #e0e0ff;">${app.time}</div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                            <div>
+                                <div style="color: #9370db; font-weight: 600;">⏰ Время:</div>
+                                <div style="color: #e0e0ff;">${app.time}</div>
+                            </div>
+                            <div>
+                                <div style="color: #9370db; font-weight: 600;">🎮 Играет сейчас:</div>
+                                <div style="color: #e0e0ff;">${app.playingNow}</div>
+                            </div>
                         </div>
                         <div style="margin-bottom: 10px;">
-                            <div style="color: #9370db; font-weight: 600;">❓ Почему выбрал нас:</div>
-                            <div style="color: #e0e0ff;">${app.whyUs}</div>
+                            <div style="color: #9370db; font-weight: 600;">❓ Почему именно я:</div>
+                            <div style="color: #e0e0ff;">${app.whyMe.substring(0, 100)}${app.whyMe.length > 100 ? '...' : ''}</div>
                         </div>
-                        ${app.experience !== 'Не указано' ? `
-                        <div style="margin-bottom: 10px;">
-                            <div style="color: #9370db; font-weight: 600;">💼 Опыт:</div>
-                            <div style="color: #e0e0ff;">${app.experience}</div>
-                        </div>
-                        ` : ''}
                     </div>
                     
                     <div class="admin-controls">
                         ${app.status === 'pending' ? `
-                            <button class="btn btn-sm btn-approve" onclick="changeStatus('${app.id}', 'approved')">
+                            <button class="btn-sm btn-approve" onclick="changeStatus('${app.id}', 'approved')">
                                 ✅ ОДОБРИТЬ
                             </button>
-                            <button class="btn btn-sm btn-reject" onclick="changeStatus('${app.id}', 'rejected')">
+                            <button class="btn-sm btn-reject" onclick="changeStatus('${app.id}', 'rejected')">
                                 ❌ ОТКЛОНИТЬ
                             </button>
                         ` : ''}
-                        <button class="btn btn-sm btn-contact" onclick="contactUser('${app.id}')">
+                        <button class="btn-sm btn-contact" onclick="contactUser('${app.id}')">
                             💬 НАПИСАТЬ В ТГ
                         </button>
-                        <button class="btn btn-sm btn-view" onclick="viewApplication('${app.id}')">
+                        <button class="btn-sm btn-view" onclick="viewApplication('${app.id}')">
                             👁️ ПРОСМОТР
                         </button>
-                        <button class="btn btn-sm btn-delete" onclick="deleteApplication('${app.id}')">
+                        <button class="btn-sm btn-delete" onclick="deleteApplication('${app.id}')">
                             🗑️ УДАЛИТЬ
                         </button>
                     </div>
@@ -1402,19 +1463,30 @@
 
         // Изменить статус заявки
         function changeStatus(appId, newStatus) {
-            if (!confirm(`Вы уверены, что хотите ${newStatus === 'approved' ? 'одобрить' : 'отклонить'} эту заявку?`)) {
-                return;
-            }
+            const statusText = newStatus === 'approved' ? 'одобрить' : 'отклонить';
+            const comment = prompt(`Введите комментарий для пользователя (оставьте пустым, если не нужно):`);
+            
+            if (comment === null) return; // Если пользователь нажал отмена
             
             const applications = getApplications();
             const appIndex = applications.findIndex(app => app.id === appId);
             
             if (appIndex !== -1) {
                 applications[appIndex].status = newStatus;
+                applications[appIndex].adminComment = comment || '';
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(applications));
                 loadApplications();
                 
-                showNotification('Успех', `✅ Заявка ${newStatus === 'approved' ? 'одобрена' : 'отклонена'}!`);
+                showNotification('Успех', `✅ Заявка ${statusText}!`, 'success');
+                
+                // Если одобрено, показываем Telegram
+                if (newStatus === 'approved') {
+                    setTimeout(() => {
+                        if (confirm(`Заявка одобрена! Перейти в Telegram пользователя ${applications[appIndex].nickname}?`)) {
+                            contactUser(appId);
+                        }
+                    }, 500);
+                }
             }
         }
 
@@ -1434,7 +1506,7 @@
             // Открываем ссылку в новом окне
             window.open(`https://t.me/${telegram}`, '_blank');
             
-            showNotification('Telegram', `💬 Открывается чат с ${application.nickname}`);
+            showNotification('Telegram', `💬 Открывается чат с ${application.nickname}`, 'success');
         }
 
         // Просмотр полной заявки
@@ -1444,76 +1516,11 @@
             
             if (!app) return;
             
-            let roleSpecificHTML = '';
-            
-            switch(app.position) {
-                case 'БИЛДЕР':
-                    roleSpecificHTML = `
-                        <div style="margin-bottom: 15px;">
-                            <div style="color: #9370db; font-weight: 600;">🏰 Примеры работ:</div>
-                            <div style="color: #e0e0ff;">${app.builderPortfolio || 'Не указано'}</div>
-                        </div>
-                        <div style="margin-bottom: 15px;">
-                            <div style="color: #9370db; font-weight: 600;">🎨 Стиль построек:</div>
-                            <div style="color: #e0e0ff;">${app.builderStyle || 'Не указано'}</div>
-                        </div>
-                    `;
-                    break;
-                case 'СКРИПТЕР':
-                    roleSpecificHTML = `
-                        <div style="margin-bottom: 15px;">
-                            <div style="color: #9370db; font-weight: 600;">💻 Навыки программирования:</div>
-                            <div style="color: #e0e0ff;">${app.scripterSkills || 'Не указано'}</div>
-                        </div>
-                        <div style="margin-bottom: 15px;">
-                            <div style="color: #9370db; font-weight: 600;">📁 Примеры работ:</div>
-                            <div style="color: #e0e0ff;">${app.scripterPortfolio || 'Не указано'}</div>
-                        </div>
-                    `;
-                    break;
-                case 'ТЕСТЕР':
-                    roleSpecificHTML = `
-                        <div style="margin-bottom: 15px;">
-                            <div style="color: #9370db; font-weight: 600;">🔍 Метод поиска багов:</div>
-                            <div style="color: #e0e0ff;">${app.testerMethod || 'Не указано'}</div>
-                        </div>
-                        <div style="margin-bottom: 15px;">
-                            <div style="color: #9370db; font-weight: 600;">📋 Отчеты о багах:</div>
-                            <div style="color: #e0e0ff;">${app.testerReports || 'Не указано'}</div>
-                        </div>
-                    `;
-                    break;
-                case 'МОДЕРАТОР':
-                    roleSpecificHTML = `
-                        <div style="margin-bottom: 15px;">
-                            <div style="color: #9370db; font-weight: 600;">⚖️ Действия при нарушении:</div>
-                            <div style="color: #e0e0ff;">${app.moderatorScenario || 'Не указано'}</div>
-                        </div>
-                        <div style="margin-bottom: 15px;">
-                            <div style="color: #9370db; font-weight: 600;">🤝 Решение конфликтов:</div>
-                            <div style="color: #e0e0ff;">${app.conflictResolution || 'Не указано'}</div>
-                        </div>
-                    `;
-                    break;
-                case 'АДМИНИСТРАТОР':
-                    roleSpecificHTML = `
-                        <div style="margin-bottom: 15px;">
-                            <div style="color: #9370db; font-weight: 600;">🎯 Идеи для проекта:</div>
-                            <div style="color: #e0e0ff;">${app.adminIdeas || 'Не указано'}</div>
-                        </div>
-                        <div style="margin-bottom: 15px;">
-                            <div style="color: #9370db; font-weight: 600;">👥 Опыт управления:</div>
-                            <div style="color: #e0e0ff;">${app.managementExperience || 'Не указано'}</div>
-                        </div>
-                    `;
-                    break;
-            }
-            
             const modal = document.createElement('div');
             modal.className = 'modal active';
             modal.innerHTML = `
-                <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto;">
-                    <h3 class="modal-title">👁️ ПРОСМОТР ЗАЯВКИ #${app.id}</h3>
+                <div class="modal-content" style="max-width: 800px; max-height: 80vh; overflow-y: auto;">
+                    <h3 class="modal-title">👁️ ПОЛНЫЙ ПРОСМОТР ЗАЯВКИ #${app.id}</h3>
                     
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
                         <div>
@@ -1545,31 +1552,117 @@
                             <div style="color: #e0e0ff;">${app.age} лет</div>
                         </div>
                         <div>
-                            <div style="color: #9370db; font-weight: 600;">Время в день:</div>
+                            <div style="color: #9370db; font-weight: 600;">Дата подачи:</div>
+                            <div style="color: #e0e0ff;">${app.date}</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                        <div>
+                            <div style="color: #9370db; font-weight: 600;">⏰ Время в день:</div>
                             <div style="color: #e0e0ff;">${app.time}</div>
+                        </div>
+                        <div>
+                            <div style="color: #9370db; font-weight: 600;">🎮 Играет сейчас:</div>
+                            <div style="color: #e0e0ff;">${app.playingNow}</div>
                         </div>
                     </div>
                     
                     <div style="margin-bottom: 20px;">
                         <div style="color: #9370db; font-weight: 600;">💼 Опыт работы:</div>
-                        <div style="color: #e0e0ff; background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
+                        <div style="color: #e0e0ff; background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px; white-space: pre-wrap;">
                             ${app.experience}
                         </div>
                     </div>
                     
                     <div style="margin-bottom: 20px;">
-                        <div style="color: #9370db; font-weight: 600;">❓ Почему выбрал нас:</div>
-                        <div style="color: #e0e0ff; background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px;">
-                            ${app.whyUs}
+                        <div style="color: #9370db; font-weight: 600;">❓ Почему именно я:</div>
+                        <div style="color: #e0e0ff; background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px; white-space: pre-wrap;">
+                            ${app.whyMe}
                         </div>
                     </div>
                     
-                    ${roleSpecificHTML}
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: #9370db; font-weight: 600;">🎯 Ожидания от работы:</div>
+                        <div style="color: #e0e0ff; background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px; white-space: pre-wrap;">
+                            ${app.expectations}
+                        </div>
+                    </div>
                     
-                    <div style="margin-top: 30px; display: flex; gap: 10px; justify-content: center;">
-                        <button class="btn btn-sm" onclick="this.closest('.modal').remove()">ЗАКРЫТЬ</button>
-                        <button class="btn btn-sm btn-contact" onclick="contactUser('${app.id}'); this.closest('.modal').remove()">
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: #9370db; font-weight: 600;">🚫 Реакция на оскорбления:</div>
+                        <div style="color: #e0e0ff; background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px; white-space: pre-wrap;">
+                            ${app.reactionToInsults}
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: #9370db; font-weight: 600;">⚖️ Ситуация с отрицанием:</div>
+                        <div style="color: #e0e0ff; background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px; white-space: pre-wrap;">
+                            ${app.denialScenario}
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: #9370db; font-weight: 600;">👥 Работа в команде:</div>
+                        <div style="color: #e0e0ff; background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px; white-space: pre-wrap;">
+                            ${app.teamwork}
+                        </div>
+                    </div>
+                    
+                    ${app.ideas !== 'Не указано' ? `
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: #9370db; font-weight: 600;">💡 Идеи для улучшения:</div>
+                        <div style="color: #e0e0ff; background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px; white-space: pre-wrap;">
+                            ${app.ideas}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                        <div>
+                            <div style="color: #9370db; font-weight: 600;">📚 Знание правил:</div>
+                            <div style="color: #e0e0ff;">${app.rulesKnowledge}</div>
+                        </div>
+                        <div>
+                            <div style="color: #9370db; font-weight: 600;">🎤 Голосовой чат:</div>
+                            <div style="color: #e0e0ff;">${app.voiceChat}</div>
+                        </div>
+                    </div>
+                    
+                    ${app.additionalSkills !== 'Не указано' ? `
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: #9370db; font-weight: 600;">🔧 Дополнительные навыки:</div>
+                        <div style="color: #e0e0ff; background: rgba(40, 35, 60, 0.5); padding: 10px; border-radius: 5px; white-space: pre-wrap;">
+                            ${app.additionalSkills}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${app.adminComment ? `
+                    <div style="margin-bottom: 20px; padding: 15px; background: rgba(138, 43, 226, 0.1); border-radius: 8px;">
+                        <div style="color: #9370db; font-weight: 700; margin-bottom: 5px;">💬 Комментарий администратора:</div>
+                        <div style="color: #e0e0ff; white-space: pre-wrap;">${app.adminComment}</div>
+                    </div>
+                    ` : ''}
+                    
+                    <div style="margin-top: 30px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                        <button class="btn-sm btn-contact" onclick="contactUser('${app.id}')">
                             💬 НАПИСАТЬ В ТГ
+                        </button>
+                        ${app.status === 'pending' ? `
+                            <button class="btn-sm btn-approve" onclick="changeStatus('${app.id}', 'approved'); this.closest('.modal').remove()">
+                                ✅ ОДОБРИТЬ
+                            </button>
+                            <button class="btn-sm btn-reject" onclick="changeStatus('${app.id}', 'rejected'); this.closest('.modal').remove()">
+                                ❌ ОТКЛОНИТЬ
+                            </button>
+                        ` : ''}
+                        <button class="btn-sm btn-delete" onclick="if(confirm('Удалить заявку?')) { deleteApplication('${app.id}'); this.closest('.modal').remove(); }">
+                            🗑️ УДАЛИТЬ
+                        </button>
+                        <button class="btn-sm" style="background: rgba(40, 35, 60, 0.7);" onclick="this.closest('.modal').remove()">
+                            ✖️ ЗАКРЫТЬ
                         </button>
                     </div>
                 </div>
@@ -1577,7 +1670,7 @@
             document.body.appendChild(modal);
         }
 
-        // Удаление заявки
+        // Удаление заявки (ИСПРАВЛЕНО)
         function deleteApplication(appId) {
             if (!confirm('Вы уверены, что хотите удалить эту заявку? Это действие нельзя отменить.')) {
                 return;
@@ -1588,7 +1681,7 @@
             localStorage.setItem(STORAGE_KEY, JSON.stringify(filteredApplications));
             loadApplications();
             
-            showNotification('Успех', '✅ Заявка удалена!');
+            showNotification('Успех', '✅ Заявка удалена!', 'success');
         }
 
         // Обновление статистики
@@ -1605,7 +1698,7 @@
         }
 
         // Показать нотификацию
-        function showNotification(title, message) {
+        function showNotification(title, message, type = '') {
             const notification = document.getElementById('notification');
             const titleElement = notification.querySelector('.notification-title');
             const messageElement = notification.querySelector('.notification-message');
@@ -1613,10 +1706,15 @@
             titleElement.textContent = title;
             messageElement.textContent = message;
             
+            notification.className = 'notification';
             notification.classList.add('show');
+            if (type) {
+                notification.classList.add(type);
+            }
             
             setTimeout(() => {
                 notification.classList.remove('show');
+                notification.classList.remove(type);
             }, 3000);
         }
 
